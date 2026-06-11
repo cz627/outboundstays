@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>List your hotel — Outbound Stays</title>
+<meta name="description" content="List your property with Outbound Stays and reach discerning travelers seeking distinctive places to stay.">
+<link rel="canonical" href="https://outboundstays.com/list-hotel.html">
+<link rel="icon" type="image/png" href="uploads/OUTBOUND%20Icon.png">
+<link rel="apple-touch-icon" href="uploads/OUTBOUND%20Icon.png">
+<meta name="theme-color" content="#1B1A17">
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Outbound Stays">
+<meta property="og:title" content="List your hotel — Outbound Stays">
+<meta property="og:description" content="List your property with Outbound Stays and reach discerning travelers seeking distinctive places to stay.">
+<meta property="og:url" content="https://outboundstays.com/list-hotel.html">
+<meta property="og:image" content="https://outboundstays.com/uploads/OUTBOUND%20Icon.png">
+<!-- Twitter -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="List your hotel — Outbound Stays">
+<meta name="twitter:description" content="List your property with Outbound Stays and reach discerning travelers seeking distinctive places to stay.">
+<meta name="twitter:image" content="https://outboundstays.com/uploads/OUTBOUND%20Icon.png">
+<link rel="stylesheet" href="css/luxe.css">
+<style>
+/* hero */
+.lh-hero{position:relative;min-height:84vh;display:flex;align-items:center;overflow:hidden;background:#15120d;}
+.lh-hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.82;}
+.lh-hero .grad{position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.66),rgba(0,0,0,.12) 62%);}
+.lh-hero-in{position:relative;z-index:2;color:#fff;padding:0 var(--gut);max-width:760px;}
+.lh-hero .eyebrow{color:rgba(255,255,255,.82);display:block;margin-bottom:22px;}
+.lh-hero h1{font-family:var(--serif);font-weight:300;font-size:clamp(44px,6.4vw,96px);line-height:1.0;letter-spacing:-0.01em;}
+.lh-hero h1 em{font-style:italic;}
+.lh-hero p{margin:24px 0 36px;max-width:48ch;font-size:clamp(15px,1.3vw,18px);line-height:1.7;color:rgba(255,255,255,.88);font-weight:300;}
+.lh-hero .cta-row{display:flex;gap:14px;flex-wrap:wrap;align-items:center;}
+
+/* shared */
+.section{padding:clamp(70px,9vw,140px) 0;}
+.center{text-align:center;}
+.eyebrow.k{display:block;margin-bottom:20px;}
+.h-display{font-family:var(--serif);font-weight:300;font-size:clamp(32px,4.6vw,62px);line-height:1.05;letter-spacing:-0.01em;}
+.h-display em{font-style:italic;}
+.lead{max-width:62ch;margin:24px auto 0;font-size:clamp(15px,1.4vw,18px);line-height:1.75;color:var(--ink-soft);font-weight:300;}
+
+/* stat band */
+.statband{border-top:1px solid var(--line);border-bottom:1px solid var(--line);display:grid;grid-template-columns:repeat(3,1fr);}
+.statband .s{padding:46px 30px;text-align:center;border-right:1px solid var(--line);}
+.statband .s:last-child{border-right:0;}
+.statband .n{font-family:var(--serif);font-weight:300;font-size:clamp(40px,4.4vw,60px);line-height:1;letter-spacing:-0.01em;}
+.statband .l{margin-top:12px;font-size:11px;text-transform:uppercase;letter-spacing:.18em;color:var(--ink-faint);}
+
+/* benefits */
+.benefits{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(30px,4vw,64px);}
+.benefit{border-top:1px solid var(--ink);padding-top:24px;}
+.benefit .num{font-family:var(--serif);font-size:15px;color:var(--bronze);}
+.benefit h3{font-family:var(--serif);font-weight:400;font-size:clamp(24px,2.4vw,32px);line-height:1.1;margin:14px 0 12px;letter-spacing:-0.01em;}
+.benefit p{font-size:15px;line-height:1.7;color:var(--ink-soft);font-weight:300;max-width:46ch;}
+
+/* steps */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:30px;}
+.step .num{font-family:var(--serif);font-size:clamp(48px,5vw,72px);font-weight:300;line-height:1;color:var(--line);}
+.step h4{font-size:14px;font-weight:600;letter-spacing:.02em;margin:16px 0 9px;}
+.step p{font-size:13.5px;line-height:1.6;color:var(--ink-soft);font-weight:300;}
+
+/* split image + criteria */
+.split{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:0;}
+.split .fig{aspect-ratio:4/5;overflow:hidden;background:var(--paper-2);}
+.split .fig img{width:100%;height:100%;object-fit:cover;}
+.split .txt{padding:clamp(40px,6vw,100px);}
+.split h2{font-family:var(--serif);font-weight:300;font-size:clamp(30px,3.6vw,50px);line-height:1.08;letter-spacing:-0.01em;}
+.split h2 em{font-style:italic;}
+.crit{margin-top:30px;display:flex;flex-direction:column;}
+.crit li{list-style:none;display:flex;gap:14px;padding:16px 0;border-top:1px solid var(--line);font-size:15px;color:var(--ink-soft);font-weight:300;line-height:1.5;}
+.crit li:last-child{border-bottom:1px solid var(--line);}
+.crit .ic{color:var(--bronze);flex:0 0 auto;margin-top:2px;}
+.crit b{color:var(--ink);font-weight:500;}
+
+/* quote */
+.quote{text-align:center;}
+.quote blockquote{font-family:var(--serif);font-weight:300;font-size:clamp(26px,3.4vw,46px);line-height:1.28;letter-spacing:-0.01em;max-width:24ch;margin:0 auto;}
+.quote .who{margin-top:30px;font-size:11px;text-transform:uppercase;letter-spacing:.2em;color:var(--ink-faint);}
+
+/* form */
+.apply{background:var(--paper-2);}
+.applywrap{display:grid;grid-template-columns:1fr 1.1fr;gap:clamp(40px,5vw,90px);align-items:start;}
+.apply h2{font-family:var(--serif);font-weight:300;font-size:clamp(32px,4vw,56px);line-height:1.04;letter-spacing:-0.01em;}
+.apply h2 em{font-style:italic;}
+.apply .sub{margin-top:20px;font-size:16px;line-height:1.7;color:var(--ink-soft);font-weight:300;max-width:42ch;}
+.apply .reassure{margin-top:32px;display:flex;flex-direction:column;gap:14px;}
+.apply .reassure div{display:flex;gap:12px;font-size:14px;color:var(--ink-soft);font-weight:300;align-items:center;}
+.apply .reassure .ic{color:var(--bronze);}
+.form{background:#fff;border:1px solid var(--line);padding:clamp(26px,3vw,40px);}
+.fgroup{margin-bottom:20px;}
+.fgroup label{display:block;font-size:10.5px;text-transform:uppercase;letter-spacing:.16em;color:var(--ink-faint);margin-bottom:9px;}
+.fgroup input,.fgroup textarea,.fgroup select{width:100%;border:1px solid var(--line);background:#fff;font-family:var(--sans);font-size:14px;color:var(--ink);padding:14px 15px;outline:none;transition:border-color .2s;}
+.fgroup input:focus,.fgroup textarea:focus,.fgroup select:focus{border-color:var(--ink);}
+.fgroup textarea{resize:vertical;min-height:96px;}
+.frow2{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.form .btn{width:100%;justify-content:center;margin-top:6px;}
+.form .fine{margin-top:16px;font-size:11.5px;color:var(--ink-faint);line-height:1.5;font-weight:300;text-align:center;}
+.thanks{display:none;text-align:center;padding:40px 10px;}
+.thanks.on{display:block;}
+.thanks .serif{font-family:var(--serif);font-weight:300;font-size:34px;display:block;margin-bottom:14px;}
+.thanks p{font-size:15px;color:var(--ink-soft);font-weight:300;line-height:1.6;}
+
+/* faq */
+.faq details{border-top:1px solid var(--line);}
+.faq details:last-child{border-bottom:1px solid var(--line);}
+.faq summary{list-style:none;cursor:pointer;padding:26px 0;display:flex;justify-content:space-between;align-items:center;gap:20px;font-family:var(--serif);font-weight:400;font-size:clamp(19px,2vw,26px);letter-spacing:-0.01em;}
+.faq summary::-webkit-details-marker{display:none;}
+.faq summary .pm{flex:0 0 auto;width:22px;height:22px;position:relative;}
+.faq summary .pm::before,.faq summary .pm::after{content:"";position:absolute;background:var(--ink);transition:.25s;}
+.faq summary .pm::before{top:10px;left:0;width:22px;height:1px;}
+.faq summary .pm::after{top:0;left:10px;width:1px;height:22px;}
+.faq details[open] summary .pm::after{transform:rotate(90deg);opacity:0;}
+.faq .ans{padding:0 0 28px;font-size:15px;line-height:1.75;color:var(--ink-soft);font-weight:300;max-width:74ch;}
+
+/* final cta */
+.finalcta{position:relative;min-height:60vh;display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden;background:#15120d;}
+.finalcta img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.55;}
+.finalcta .grad{position:absolute;inset:0;background:rgba(0,0,0,.3);}
+.finalcta-in{position:relative;z-index:2;color:#fff;padding:0 24px;max-width:680px;}
+.finalcta h2{font-family:var(--serif);font-weight:300;font-size:clamp(34px,5vw,68px);line-height:1.02;}
+.finalcta p{margin:20px auto 32px;max-width:44ch;font-size:16px;line-height:1.7;color:rgba(255,255,255,.88);font-weight:300;}
+
+/* footer */
+.foot{border-top:1px solid var(--line);padding:44px 0;}
+.foot-in{max-width:var(--maxw);margin:0 auto;padding:0 var(--gut);display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;font-size:12px;color:var(--ink-faint);font-weight:300;}
+
+@media(max-width:900px){
+  .statband{grid-template-columns:1fr;}
+  .statband .s{border-right:0;border-bottom:1px solid var(--line);}
+  .statband .s:last-child{border-bottom:0;}
+  .benefits{grid-template-columns:1fr;}
+  .steps{grid-template-columns:1fr 1fr;gap:34px 24px;}
+  .split{grid-template-columns:1fr;}
+  .split .fig{aspect-ratio:16/10;}
+  .applywrap{grid-template-columns:1fr;}
+  .frow2{grid-template-columns:1fr;}
+}
+@media(max-width:560px){
+  .steps{grid-template-columns:1fr;}
+  .foot-in{flex-direction:column;align-items:flex-start;text-align:left;}
+  .lh-hero .cta-row{flex-direction:column;align-items:flex-start;}
+}
+</style>
+</head>
+<body>
+
+<nav id="site-nav" data-active="list"></nav>
+
+<!-- HERO -->
+<header class="lh-hero">
+  <img id="lhHero" alt="">
+  <div class="grad"></div>
+  <div class="lh-hero-in">
+    <span class="eyebrow k">Partner with us</span>
+    <h1>List your <em>hotel</em></h1>
+    <p>If you run a hotel with genuine character, we'd love to consider it for the Outbound Stays collection — and put it in front of travellers who choose where they stay with real care.</p>
+    <div class="cta-row">
+      <a href="#apply" class="btn btn-light">Apply to join</a>
+      <a href="#how" class="link-u" style="color:#fff;">How it works</a>
+    </div>
+  </div>
+</header>
+
+<!-- INTRO -->
+<section class="section center wrap" style="padding-bottom:clamp(40px,5vw,70px);">
+  <span class="eyebrow k">A curated collection, not a marketplace</span>
+  <h2 class="h-display">Reach travellers who<br>care <em>where they wake up</em></h2>
+  <p class="lead">Outbound Stays is a handpicked guide to the world's most inspiring places to stay. We don't list everyone — which is exactly why discerning travellers trust us, and why a place in the collection means something. Guests discover your hotel through editorial we write by hand, then book directly with you.</p>
+</section>
+
+<!-- STATS -->
+<section class="wrap">
+  <div class="statband">
+    <div class="s"><div class="n" id="stStays">1,470</div><div class="l">Curated stays</div></div>
+    <div class="s"><div class="n">80+</div><div class="l">Countries</div></div>
+    <div class="s"><div class="n">Direct</div><div class="l">Bookings, straight to you</div></div>
+  </div>
+</section>
+
+<!-- BENEFITS -->
+<section class="section wrap">
+  <div style="margin-bottom:54px;">
+    <span class="eyebrow k">Why partner with Outbound Stays</span>
+    <h2 class="h-display" style="max-width:16ch;">The benefits of being <em>chosen</em></h2>
+  </div>
+  <div class="benefits">
+    <div class="benefit"><div class="num">01</div><h3>A high-intent audience</h3><p>Our readers arrive already inspired and ready to travel. They're not price-shopping a thousand listings — they're looking for somewhere worth the journey.</p></div>
+    <div class="benefit"><div class="num">02</div><h3>Editorial, written by hand</h3><p>Every featured hotel gets a considered write-up and a gallery that does it justice. No template descriptions, no star ratings — just an honest portrait of the place.</p></div>
+    <div class="benefit"><div class="num">03</div><h3>Direct relationships</h3><p>We send guests to book directly with you. You keep the relationship, the data and the margin — we simply make the introduction.</p></div>
+    <div class="benefit"><div class="num">04</div><h3>No pay-to-play, ever</h3><p>You can't buy your way onto Outbound Stays. That integrity is the whole point — and it's what makes a feature genuinely valuable.</p></div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section wrap" id="how" style="padding-top:0;">
+  <div class="center" style="margin-bottom:60px;">
+    <span class="eyebrow k">How it works</span>
+    <h2 class="h-display">From application to <em>arrival</em></h2>
+  </div>
+  <div class="steps">
+    <div class="step"><div class="num">1</div><h4>Apply</h4><p>Tell us about your hotel using the form below. It takes a few minutes — no fees, no commitment.</p></div>
+    <div class="step"><div class="num">2</div><h4>We review &amp; vet</h4><p>Our editors assess every application for character, design and sense of place — and visit where we can.</p></div>
+    <div class="step"><div class="num">3</div><h4>You're featured</h4><p>If it's a fit, we craft your profile and add it to the collection and the map, in front of the right audience.</p></div>
+    <div class="step"><div class="num">4</div><h4>Guests book direct</h4><p>Travellers discover your hotel and book straight with you — you keep the guest relationship.</p></div>
+  </div>
+</section>
+
+<!-- CRITERIA SPLIT -->
+<section class="split">
+  <div class="fig"><img id="critImg" alt=""></div>
+  <div class="txt">
+    <span class="eyebrow k">What we look for</span>
+    <h2>Character over<br><em>category</em></h2>
+    <ul class="crit" style="padding:0;margin-top:30px;">
+      <li><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="m5 13 4 4L19 7"/></svg></span><span><b>A strong sense of place.</b> A hotel that could only exist where it is.</span></li>
+      <li><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="m5 13 4 4L19 7"/></svg></span><span><b>Thoughtful design.</b> Architecture, interiors and detail that feel considered.</span></li>
+      <li><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="m5 13 4 4L19 7"/></svg></span><span><b>Genuine hospitality.</b> People and service that make guests want to return.</span></li>
+      <li><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="m5 13 4 4L19 7"/></svg></span><span><b>Independent spirit.</b> Boutique hotels, design hotels, retreats, lodges, villas and one-of-a-kind stays — not chains.</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- QUOTE -->
+<section class="section wrap quote">
+  <blockquote>“The hotels we choose feel like discoveries. That's the bar.”</blockquote>
+  <div class="who">The Outbound Stays editors</div>
+</section>
+
+<!-- APPLY -->
+<section class="apply section" id="apply">
+  <div class="wrap applywrap">
+    <div>
+      <span class="eyebrow k">Apply to join</span>
+      <h2>Tell us about<br>your <em>hotel</em></h2>
+      <p class="sub">Share a few details and our editorial team will be in touch. There's no fee to apply and no obligation.</p>
+      <div class="reassure">
+        <div><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="m5 13 4 4L19 7"/></svg></span> No listing fees</div>
+        <div><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="m5 13 4 4L19 7"/></svg></span> You keep direct bookings</div>
+        <div><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="m5 13 4 4L19 7"/></svg></span> A reply within five working days</div>
+      </div>
+    </div>
+    <div>
+      <form class="form" id="applyForm" novalidate>
+        <div class="fgroup"><label>Hotel name</label><input name="hotel" required placeholder="e.g. Château Victor"></div>
+        <div class="frow2">
+          <div class="fgroup"><label>City</label><input name="city" required placeholder="City or area"></div>
+          <div class="fgroup"><label>Country</label><input name="country" required placeholder="Country"></div>
+        </div>
+        <div class="fgroup"><label>Website</label><input name="web" type="url" placeholder="https://"></div>
+        <div class="frow2">
+          <div class="fgroup"><label>Your name</label><input name="name" required placeholder="Full name"></div>
+          <div class="fgroup"><label>Email</label><input name="email" type="email" required placeholder="you@hotel.com"></div>
+        </div>
+        <div class="fgroup"><label>Rooms</label>
+          <select name="rooms">
+            <option>1–10 rooms</option><option>11–25 rooms</option><option>26–50 rooms</option><option>50+ rooms</option><option>Villa / private home</option>
+          </select>
+        </div>
+        <div class="fgroup"><label>Tell us what makes it special</label><textarea name="about" placeholder="Design, location, story, the experience of staying…"></textarea></div>
+        <button class="btn btn-dark" type="submit">Submit application</button>
+        <p class="fine">By applying you agree to be contacted by the Outbound Stays editorial team. We never share your details.</p>
+      </form>
+      <div class="thanks" id="thanks">
+        <span class="serif">Thank you.</span>
+        <p>Your application is with our editors. If your hotel feels like a fit for the collection, we'll be in touch within five working days.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section wrap">
+  <div class="center" style="margin-bottom:50px;">
+    <span class="eyebrow k">Good to know</span>
+    <h2 class="h-display">Questions, <em>answered</em></h2>
+  </div>
+  <div class="faq" style="max-width:920px;margin:0 auto;">
+    <details><summary>What does it cost to be listed?<span class="pm"></span></summary><div class="ans">Nothing to apply, and nothing to be featured. Outbound Stays earns through affiliate partnerships on bookings, so we only benefit when a guest loves your hotel enough to book it. There are no listing fees or subscriptions.</div></details>
+    <details><summary>What kinds of properties do you accept?<span class="pm"></span></summary><div class="ans">Independent boutique hotels, design hotels, retreats, lodges, villas and genuinely unique stays. We don't feature chains or properties without a strong sense of place. Size matters far less than character.</div></details>
+    <details><summary>How do bookings work?<span class="pm"></span></summary><div class="ans">We send travellers to book directly with you or through your preferred booking partner. You keep the guest relationship, the data and the margin — we simply make the introduction through our editorial.</div></details>
+    <details><summary>How long does the review take?<span class="pm"></span></summary><div class="ans">Our editorial team aims to respond to every application within five working days. If your hotel is a strong fit, we'll discuss next steps, imagery and your profile.</div></details>
+    <details><summary>Can I pay to feature more prominently?<span class="pm"></span></summary><div class="ans">No. Placement is editorial and can't be bought — that integrity is exactly what makes a feature on Outbound Stays worth having.</div></details>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="finalcta">
+  <img id="finalImg" alt="">
+  <div class="grad"></div>
+  <div class="finalcta-in">
+    <h2>Ready to be discovered?</h2>
+    <p>Join a collection that travellers genuinely trust — and reach the guests who'll love your hotel most.</p>
+    <a href="#apply" class="btn btn-light">Apply to join</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="foot">
+  <div class="foot-in">
+    <span class="wordmark">Outbound <span class="thin">Stays</span></span>
+    <span class="foot-links"><a href="explore.html">Explore map</a><a href="destinations.html">Destinations</a><a href="experiences.html">Experiences</a><a href="list-hotel.html">List your hotel</a><a href="index.html#promise">Our promise</a></span>
+    <span>© 2026 Outbound Stays · Some links are affiliate links — we may earn a commission at no cost to you.</span>
+  </div>
+</footer>
+
+<script src="data/hotels.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="js/nav.js"></script>
+<script>
+const H = window.HOTELS || [];
+const covers = H.filter(h=>/bstatic\.com/.test(h.img) && h.desc && h.desc.length>100 && h.gallery.length>=3);
+function shuf(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function check(url){return new Promise(res=>{const im=new Image();let d=false;const t=setTimeout(()=>{if(!d){d=true;res(false);}},6000);im.onload=()=>{if(!d){d=true;clearTimeout(t);res(im.naturalWidth>2);}};im.onerror=()=>{if(!d){d=true;clearTimeout(t);res(false);}};im.src=url;});}
+const stStays=document.getElementById('stStays'); if(stStays) stStays.textContent = H.length.toLocaleString('en-US');
+
+(async function(){
+  const cand = shuf(covers).slice(0,40);
+  const ok = await Promise.all(cand.map(h=>check(h.img)));
+  let v = cand.filter((h,i)=>ok[i]); if(v.length<3) v=cand;
+  const set=(id,url)=>{const el=document.getElementById(id);if(el){el.onload=()=>el.style.opacity=el.classList.contains('dim')?'':'';el.src=url;}};
+  document.getElementById('lhHero').src = v[0].img;
+  document.getElementById('critImg').src = v[1].img;
+  document.getElementById('finalImg').src = v[2].img;
+})();
+
+const form = document.getElementById('applyForm');
+form.addEventListener('submit', e=>{
+  e.preventDefault();
+  if(!form.checkValidity()){ form.reportValidity(); return; }
+  form.style.display='none';
+  document.getElementById('thanks').classList.add('on');
+  document.getElementById('thanks').scrollIntoView ? window.scrollTo({top:form.getBoundingClientRect().top+window.scrollY-140,behavior:'smooth'}) : null;
+});
+</script>
+</body>
+</html>

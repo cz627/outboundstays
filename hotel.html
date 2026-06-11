@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stay — Outbound Stays</title>
+<meta name="description" content="A distinctive place to stay, curated by Outbound Stays.">
+<link rel="canonical" href="https://outboundstays.com/hotel.html">
+<link rel="icon" type="image/png" href="uploads/OUTBOUND%20Icon.png">
+<link rel="apple-touch-icon" href="uploads/OUTBOUND%20Icon.png">
+<meta name="theme-color" content="#1B1A17">
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Outbound Stays">
+<meta property="og:title" content="Stay — Outbound Stays">
+<meta property="og:description" content="A distinctive place to stay, curated by Outbound Stays.">
+<meta property="og:url" content="https://outboundstays.com/hotel.html">
+<meta property="og:image" content="https://outboundstays.com/uploads/OUTBOUND%20Icon.png">
+<!-- Twitter -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Stay — Outbound Stays">
+<meta name="twitter:description" content="A distinctive place to stay, curated by Outbound Stays.">
+<meta name="twitter:image" content="https://outboundstays.com/uploads/OUTBOUND%20Icon.png">
+<link rel="stylesheet" href="css/luxe.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+<style>
+.nav-inner{height:68px;}
+.crumb{padding:26px var(--gut) 0;font-size:10.5px;text-transform:uppercase;letter-spacing:.18em;color:var(--ink-faint);display:flex;gap:11px;align-items:center;}
+.crumb a:hover{color:var(--bronze);}
+.crumb span{opacity:.5;}
+
+.titleblock{padding:24px var(--gut) 34px;text-align:center;border-bottom:1px solid var(--line);}
+.titleblock .loc{font-size:11px;text-transform:uppercase;letter-spacing:.2em;color:var(--ink-faint);margin-bottom:16px;}
+.titleblock h1{font-family:var(--serif);font-weight:300;font-size:clamp(40px,6vw,86px);line-height:1.0;letter-spacing:-0.01em;}
+.titleblock .tier{margin-top:16px;font-size:12px;letter-spacing:.14em;color:var(--ink-soft);text-transform:uppercase;}
+
+/* gallery */
+.gallery{display:grid;grid-auto-rows:clamp(150px,18vw,250px);gap:8px;padding:8px var(--gut) 0;grid-template-columns:2fr 1fr 1fr;}
+.gallery.g1{grid-template-columns:1fr;grid-auto-rows:clamp(300px,46vw,580px);}
+.gallery.g2{grid-template-columns:1fr 1fr;}
+.gallery.g3{grid-template-columns:1fr 1fr 1fr;}
+.gallery.g4{grid-template-columns:1fr 1fr;}
+.gallery.g5{grid-template-columns:2fr 1fr 1fr;}
+.gallery a{overflow:hidden;background:var(--paper-2);display:block;cursor:zoom-in;}
+.gallery a img{width:100%;height:100%;object-fit:cover;transition:transform .9s cubic-bezier(.2,.7,.2,1);}
+.gallery a:hover img{transform:scale(1.05);}
+.gallery.g5 .big{grid-column:1;grid-row:span 2;}
+.gallery .show-more{position:relative;}
+.gallery .show-more .ov{position:absolute;inset:0;background:rgba(0,0,0,.5);color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:26px;font-weight:300;}
+
+.detail{display:grid;grid-template-columns:1.6fr 1fr;gap:clamp(40px,5vw,90px);padding:clamp(54px,7vw,100px) var(--gut);align-items:start;}
+.lede{font-family:var(--serif);font-weight:300;font-size:clamp(23px,2.3vw,32px);line-height:1.4;color:var(--ink);letter-spacing:-0.01em;}
+.body-copy{margin-top:28px;font-size:16px;line-height:1.85;color:var(--ink-soft);font-weight:300;max-width:60ch;}
+.tags{display:flex;flex-wrap:wrap;gap:9px;margin-top:38px;}
+.tag{font-size:11px;text-transform:uppercase;letter-spacing:.12em;padding:9px 16px;border:1px solid var(--line);color:var(--ink-soft);}
+
+.bookcard{position:sticky;top:90px;border:1px solid var(--line);padding:32px;}
+.bookcard .eyebrow{margin-bottom:16px;display:block;}
+.bookcard h3{font-family:var(--serif);font-weight:300;font-size:30px;line-height:1.08;margin-bottom:8px;}
+.bookcard .sub{font-size:13.5px;color:var(--ink-soft);line-height:1.6;margin-bottom:26px;font-weight:300;}
+.bookcard .btn{width:100%;justify-content:center;margin-bottom:11px;}
+.bookcard .fineprint{font-size:11px;color:var(--ink-faint);line-height:1.55;margin-top:18px;text-align:center;font-weight:300;}
+.factrow{display:flex;justify-content:space-between;padding:14px 0;border-top:1px solid var(--line-soft);font-size:13.5px;}
+.factrow:first-of-type{border-top:1px solid var(--line);margin-top:24px;}
+.factrow .k{color:var(--ink-faint);text-transform:uppercase;letter-spacing:.12em;font-size:10.5px;}
+.factrow .v{color:var(--ink);font-weight:500;}
+
+.mapsec{padding:0 var(--gut) clamp(54px,7vw,90px);}
+.mapsec .eyebrow{display:block;margin-bottom:14px;}
+.mapsec h2{font-family:var(--serif);font-weight:300;font-size:clamp(28px,3vw,42px);margin-bottom:6px;}
+.mapsec .sub{font-size:14px;color:var(--ink-soft);margin-bottom:26px;font-weight:300;}
+#minimap{height:clamp(300px,40vw,440px);border:1px solid var(--line);background:#EEEBE5;}
+.leaflet-tile-pane{filter:saturate(.78) brightness(1.03);}
+.pin{width:15px;height:15px;border-radius:50%;background:var(--bronze);border:3px solid #fff;box-shadow:0 0 0 6px rgba(154,126,82,.2),0 2px 6px rgba(0,0,0,.35);}
+
+.nearby{padding:clamp(54px,7vw,100px) var(--gut) clamp(70px,9vw,120px);border-top:1px solid var(--line);}
+.nearby .sec-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:44px;gap:20px;}
+.nearby .eyebrow{display:block;margin-bottom:14px;}
+.nearby h2{font-family:var(--serif);font-weight:300;font-size:clamp(30px,3.6vw,52px);line-height:1.02;letter-spacing:-0.01em;}
+.nearby h2 em{font-style:italic;}
+.ngrid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;}
+.ncard .nfig{aspect-ratio:3/4;overflow:hidden;background:var(--paper-2);}
+.ncard .nfig img{width:100%;height:100%;object-fit:cover;transition:transform .9s cubic-bezier(.2,.7,.2,1);}
+.ncard:hover .nfig img{transform:scale(1.05);}
+.nloc{font-size:10px;text-transform:uppercase;letter-spacing:.16em;color:var(--ink-faint);margin-top:15px;}
+.nname{font-family:var(--serif);font-size:20px;line-height:1.1;margin-top:7px;}
+.nprice{font-size:11px;color:var(--ink-soft);letter-spacing:.08em;margin-top:8px;}
+
+.lb{position:fixed;inset:0;z-index:2000;background:rgba(12,11,9,.95);display:none;align-items:center;justify-content:center;}
+.lb.on{display:flex;}
+.lb img{max-width:90vw;max-height:86vh;object-fit:contain;}
+.lb-close{position:absolute;top:24px;right:30px;color:#fff;font-size:30px;cursor:pointer;line-height:1;}
+.lb-nav{position:absolute;top:50%;transform:translateY(-50%);color:#fff;font-size:46px;cursor:pointer;padding:18px;user-select:none;opacity:.7;}
+.lb-nav:hover{opacity:1;}
+.lb-prev{left:14px;}.lb-next{right:14px;}
+
+.foot{border-top:1px solid var(--line);padding:44px 0;}
+.foot-in{max-width:var(--maxw);margin:0 auto;padding:0 var(--gut);display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;font-size:12px;color:var(--ink-faint);font-weight:300;}
+
+@media(max-width:880px){
+  .detail{grid-template-columns:1fr;}
+  .bookcard{position:static;}
+  .gallery.g3,.gallery.g4,.gallery.g5{grid-template-columns:1fr 1fr;}
+  .gallery.g5 .big{grid-column:span 2;}
+  .ngrid{grid-template-columns:1fr 1fr;}
+}
+@media(max-width:560px){
+  .foot-in{flex-direction:column;align-items:flex-start;text-align:left;}
+  .nearby .sec-head{flex-direction:column;align-items:flex-start;gap:14px;}
+  .gallery{grid-auto-rows:clamp(120px,42vw,200px);}
+}
+</style>
+</head>
+<body>
+
+<nav id="site-nav"></nav>
+
+<main id="app"></main>
+
+<div class="lb" id="lb">
+  <span class="lb-close" id="lbClose">×</span>
+  <span class="lb-nav lb-prev" id="lbPrev">‹</span>
+  <img id="lbImg" alt="">
+  <span class="lb-nav lb-next" id="lbNext">›</span>
+</div>
+
+<footer class="foot">
+  <div class="foot-in">
+    <span class="wordmark">Outbound <span class="thin">Stays</span></span>
+    <span class="foot-links"><a href="explore.html">Explore map</a><a href="destinations.html">Destinations</a><a href="experiences.html">Experiences</a><a href="list-hotel.html">List your hotel</a><a href="index.html#promise">Our promise</a></span>
+    <span>© 2026 Outbound Stays · Some links are affiliate links — we may earn a commission at no cost to you.</span>
+  </div>
+</footer>
+
+<script src="data/hotels.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="js/nav.js"></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script>
+const H = window.HOTELS || [];
+const tierLabel = {'$':'Considered','$$':'Boutique','$$$':'Luxury','$$$$':'Rarefied'};
+const tierBlurb = {'$':'Thoughtful value','$$':'Boutique character','$$$':'Quietly luxurious','$$$$':'Rare & rarefied'};
+const params = new URLSearchParams(location.search);
+let id = parseInt(params.get('id'),10);
+if(isNaN(id) || !H.find(h=>h.id===id)) id = H[0].id;
+const h = H.find(x=>x.id===id);
+document.title = h.name + ' — Outbound Stays';
+
+function tags(){
+  const base=[];
+  if(h.exp)h.exp.split(/[;,]/).map(s=>s.trim()).filter(Boolean).forEach(t=>base.push(t));
+  const d=(h.desc||'').toLowerCase();
+  const add=(c,l)=>{if(c&&!base.includes(l)&&base.length<6)base.push(l);};
+  add(/sea|coast|beach|ocean|island|cliff/.test(d),'Coastal');
+  add(/mountain|alp|peak|ski|valley/.test(d),'Mountain');
+  add(/design|architect|contemporary|modern/.test(d),'Design-led');
+  add(/spa|wellness|thermal|sauna|pool/.test(d),'Spa & wellness');
+  add(/vineyard|wine|estate|garden|organic/.test(d),'Countryside');
+  add(/historic|century|restored|château|castle|palazzo|medieval/.test(d),'Historic');
+  add(/city|urban|district|downtown/.test(d),'City');
+  if(base.length===0){base.push(h.region,tierLabel[h.price]);}
+  return base.slice(0,6);
+}
+const gal=(h.gallery&&h.gallery.length?h.gallery:[h.img]).slice(0,8);
+let galValid = gal.slice(0,5);
+function check(url){return new Promise(res=>{const im=new Image();let d=false;const t=setTimeout(()=>{if(!d){d=true;res(false);}},6000);im.onload=()=>{if(!d){d=true;clearTimeout(t);res(im.naturalWidth>2);}};im.onerror=()=>{if(!d){d=true;clearTimeout(t);res(false);}};im.src=url;});}
+function galleryHTML(){
+  const n=Math.min(galValid.length,5);
+  return galValid.slice(0,5).map((src,i)=>{
+    const big=(n>=5&&i===0)?'big':'';
+    return `<a class="${big}" data-i="${i}"><img loading="lazy" src="${src}" alt="${h.name}"></a>`;
+  }).join('');
+}
+const exp=tags();
+document.getElementById('app').innerHTML=`
+  <div class="crumb"><a href="index.html">Home</a><span>/</span><a href="explore.html?region=${encodeURIComponent(h.region)}">${h.region}</a><span>/</span><a href="explore.html?q=${encodeURIComponent(h.country)}">${h.country}</a></div>
+  <div class="titleblock">
+    <div class="loc">${h.city?h.city+', ':''}${h.country}</div>
+    <h1 class="serif">${h.name}</h1>
+    <div class="tier">${h.price} · ${tierLabel[h.price]}</div>
+  </div>
+  <div class="gallery g${Math.min(galValid.length,5)}">${galleryHTML()}</div>
+  <div class="detail">
+    <div>
+      <span class="eyebrow" style="display:block;margin-bottom:20px;">Why we chose it</span>
+      <p class="lede">${h.desc||(h.name+' is a handpicked stay in '+(h.city||h.country)+', chosen for its character and sense of place.')}</p>
+      <p class="body-copy">Part of the Outbound Stays collection, ${h.name} is one of the places we think is genuinely worth the journey in ${h.country} — chosen for its character, its design and the experience of staying there.</p>
+      <div class="tags">${exp.map(t=>`<span class="tag">${t}</span>`).join('')}</div>
+    </div>
+    <aside>
+      <div class="bookcard">
+        <span class="eyebrow">Plan your stay</span>
+        <h3 class="serif">Reserve your stay</h3>
+        <p class="sub">A place we're glad to have found, and one we hope you'll love too. Whenever the time feels right, you can see availability and dates over at the hotel.</p>
+        <a class="btn btn-dark" href="${h.web||'#'}" target="_blank" rel="noopener nofollow">Book your stay</a>
+        <a class="btn btn-outline" href="explore.html?region=${encodeURIComponent(h.region)}">More in ${h.region}</a>
+        <div class="factrow"><span class="k">Region</span><span class="v">${h.region}</span></div>
+        <div class="factrow"><span class="k">Location</span><span class="v">${h.city?h.city+', ':''}${h.country}</span></div>
+        <div class="factrow"><span class="k">Tier</span><span class="v">${h.price} · ${tierBlurb[h.price]}</span></div>
+        <p class="fineprint">Links to the hotel may be affiliate links. If you book, we may earn a small commission — never at extra cost to you, and it never sways what we feature.</p>
+      </div>
+    </aside>
+  </div>
+  <div class="mapsec">
+    <span class="eyebrow">Location</span>
+    <h2 class="serif">Where you'll be</h2>
+    <p class="sub">${h.city?h.city+', ':''}${h.country} · ${h.region}</p>
+    <div id="minimap"></div>
+  </div>
+  <section class="nearby">
+    <div class="sec-head">
+      <div><span class="eyebrow">Keep exploring</span><h2 class="serif">More stays in <em>${h.country}</em></h2></div>
+      <a href="explore.html?q=${encodeURIComponent(h.country)}" class="link-u">See all on the map</a>
+    </div>
+    <div class="ngrid" id="ngrid"></div>
+  </section>`;
+
+function dist(x){const dx=x.lat-h.lat,dy=x.lng-h.lng;return dx*dx+dy*dy;}
+function nearCandidates(){
+  const sc=H.filter(x=>x.id!==h.id&&x.country===h.country).sort((a,b)=>dist(a)-dist(b));
+  const sr=H.filter(x=>x.id!==h.id&&x.country!==h.country&&x.region===h.region);
+  return [...sc,...sr].slice(0,16);
+}
+(async function buildNearby(){
+  const cand=nearCandidates();
+  const checks=await Promise.all(cand.map(n=>check(n.img)));
+  const ok=cand.filter((n,i)=>checks[i]);
+  const list=(ok.length?ok:cand).slice(0,4);
+  document.getElementById('ngrid').innerHTML=list.map(n=>`
+    <a class="ncard" href="hotel.html?id=${n.id}">
+      <div class="nfig"><img loading="lazy" src="${n.img}" alt="${n.name}"></div>
+      <div class="nloc">${n.city||n.country}</div>
+      <div class="nname">${n.name}</div>
+      <div class="nprice">${n.price} · ${tierLabel[n.price]}</div>
+    </a>`).join('');
+})();
+
+const mm=L.map('minimap',{zoomControl:true,scrollWheelZoom:false}).setView([h.lat,h.lng],11);
+L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',{subdomains:'abcd',attribution:'© OpenStreetMap · © CARTO',maxZoom:19}).addTo(mm);
+L.marker([h.lat,h.lng],{icon:L.divIcon({className:'',html:'<div class="pin"></div>',iconSize:[15,15],iconAnchor:[7,7]})}).addTo(mm);
+
+const lb=document.getElementById('lb'),lbImg=document.getElementById('lbImg');let lbi=0;
+function openLB(i){lbi=i;lbImg.src=galValid[i];lb.classList.add('on');}
+function step(d){lbi=(lbi+d+galValid.length)%galValid.length;lbImg.src=galValid[lbi];}
+function bindGallery(){document.querySelectorAll('.gallery a').forEach(a=>a.addEventListener('click',()=>openLB(+a.dataset.i)));}
+bindGallery();
+// verify gallery photos — show only the ones that actually load (never another hotel's)
+(async function(){
+  const checks=await Promise.all(gal.map(s=>check(s)));
+  let working=gal.filter((s,i)=>checks[i]);
+  if(working.length===0) working=[h.img];
+  galValid=working.slice(0,5);
+  const gEl=document.querySelector('.gallery');
+  gEl.className='gallery g'+Math.min(galValid.length,5);
+  gEl.innerHTML=galleryHTML();
+  bindGallery();
+})();
+document.getElementById('lbClose').onclick=()=>lb.classList.remove('on');
+document.getElementById('lbPrev').onclick=e=>{e.stopPropagation();step(-1);};
+document.getElementById('lbNext').onclick=e=>{e.stopPropagation();step(1);};
+lb.addEventListener('click',e=>{if(e.target===lb)lb.classList.remove('on');});
+document.addEventListener('keydown',e=>{if(!lb.classList.contains('on'))return;if(e.key==='Escape')lb.classList.remove('on');if(e.key==='ArrowRight')step(1);if(e.key==='ArrowLeft')step(-1);});
+
+window.scrollTo(0,0);
+</script>
+</body>
+</html>

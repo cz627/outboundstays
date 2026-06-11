@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Outbound Stays — Exceptional places to stay</title>
+<meta name="description" content="An editorial collection of the world's most distinctive places to stay. Browse by interactive map, by destination, or by experience.">
+<link rel="canonical" href="https://outboundstays.com/">
+<link rel="icon" type="image/png" href="uploads/OUTBOUND%20Icon.png">
+<link rel="apple-touch-icon" href="uploads/OUTBOUND%20Icon.png">
+<meta name="theme-color" content="#1B1A17">
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Outbound Stays">
+<meta property="og:title" content="Outbound Stays — Exceptional places to stay">
+<meta property="og:description" content="An editorial collection of the world's most distinctive places to stay. Browse by interactive map, by destination, or by experience.">
+<meta property="og:url" content="https://outboundstays.com/">
+<meta property="og:image" content="https://outboundstays.com/uploads/OUTBOUND%20Icon.png">
+<!-- Twitter -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Outbound Stays — Exceptional places to stay">
+<meta name="twitter:description" content="An editorial collection of the world's most distinctive places to stay. Browse by interactive map, by destination, or by experience.">
+<meta name="twitter:image" content="https://outboundstays.com/uploads/OUTBOUND%20Icon.png">
+<link rel="stylesheet" href="css/luxe.css">
+<style>
+/* ===== HERO ===== */
+.hero{position:relative;height:90vh;min-height:600px;display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden;background:#15120d;}
+.hero-layer{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;}
+.hero-layer.show{opacity:.9;}
+.hero-cap{position:absolute;right:var(--gut);bottom:30px;z-index:3;text-align:right;color:rgba(255,255,255,.78);font-size:12px;line-height:1.4;max-width:240px;font-weight:300;transition:opacity .6s ease;}
+.hero-cap b{display:block;font-weight:400;color:#fff;font-size:13px;letter-spacing:.02em;}
+.hero-cap .ar{display:inline-block;margin-left:5px;opacity:.7;}
+@media(max-width:680px){.hero-cap{display:none;}}
+.hero-grad{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.34) 0%,rgba(0,0,0,.05) 40%,rgba(0,0,0,.05) 60%,rgba(0,0,0,.5) 100%);}
+.hero-in{position:relative;z-index:2;color:#fff;padding:0 24px;max-width:1000px;}
+.hero .eyebrow{color:rgba(255,255,255,.82);margin-bottom:26px;}
+.hero h1{font-family:var(--serif);font-weight:300;font-size:clamp(44px,6.4vw,94px);line-height:1.04;letter-spacing:-0.01em;}
+.hero h1 em{font-style:italic;}
+.hero p.sub{margin:30px auto 0;max-width:46ch;font-size:clamp(14px,1.2vw,16px);line-height:1.7;color:rgba(255,255,255,.86);font-weight:300;}
+
+/* destination search */
+.dsearch{margin:38px auto 0;background:#fff;display:flex;align-items:stretch;max-width:680px;box-shadow:0 24px 60px rgba(0,0,0,.22);}
+.dsearch .field{flex:1;display:flex;align-items:center;gap:12px;padding:0 22px;border-right:1px solid var(--line);}
+.dsearch input{flex:1;border:0;background:transparent;font-family:var(--sans);font-size:14px;color:var(--ink);padding:20px 0;outline:none;}
+.dsearch input::placeholder{color:var(--ink-faint);}
+.dsearch button{border:0;background:var(--ink);color:#fff;padding:0 30px;font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.18em;transition:.2s;}
+.dsearch button:hover{background:var(--bronze-deep);}
+.hero-scroll{position:absolute;bottom:30px;left:50%;transform:translateX(-50%);z-index:2;color:rgba(255,255,255,.7);font-size:10px;text-transform:uppercase;letter-spacing:.28em;}
+
+/* ===== sections ===== */
+.section{padding:clamp(70px,9vw,140px) 0;}
+.center{text-align:center;}
+.kicker{display:block;margin-bottom:22px;}
+.h-display{font-family:var(--serif);font-weight:300;font-size:clamp(34px,5vw,68px);line-height:1.04;letter-spacing:-0.01em;}
+.h-display em{font-style:italic;}
+.lead-line{max-width:60ch;margin:26px auto 0;font-size:clamp(15px,1.4vw,19px);line-height:1.75;color:var(--ink-soft);font-weight:300;}
+
+.sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:30px;margin-bottom:54px;}
+.sec-head h2{font-family:var(--serif);font-weight:300;font-size:clamp(30px,4vw,54px);line-height:1.04;letter-spacing:-0.01em;}
+.sec-head h2 em{font-style:italic;}
+
+/* feature grid */
+.fgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(20px,2.6vw,40px) clamp(18px,2vw,30px);}
+.fcard{display:block;}
+.fcard .fig{position:relative;aspect-ratio:3/4;overflow:hidden;background:var(--paper-2);}
+.fcard .fig img{width:100%;height:100%;object-fit:cover;transition:transform 1.1s cubic-bezier(.2,.7,.2,1);}
+.fcard:hover .fig img{transform:scale(1.04);}
+.fcard .save{position:absolute;top:16px;right:16px;width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.85);display:flex;align-items:center;justify-content:center;opacity:0;transition:.25s;}
+.fcard:hover .save{opacity:1;}
+.fcard .meta{padding-top:18px;}
+.fcard .loc{font-size:11px;text-transform:uppercase;letter-spacing:.18em;color:var(--ink-faint);}
+.fcard .name{font-family:var(--serif);font-size:25px;line-height:1.1;margin-top:8px;}
+.fcard .row{display:flex;justify-content:space-between;align-items:baseline;margin-top:9px;border-top:1px solid var(--line);padding-top:11px;}
+.fcard .desc{font-size:13px;color:var(--ink-soft);font-weight:300;line-height:1.5;display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden;max-width:80%;}
+
+/* destinations — big editorial tiles */
+.dest{display:grid;grid-template-columns:repeat(12,1fr);gap:14px;grid-auto-rows:230px;}
+.tile{position:relative;overflow:hidden;background:#1a1611;display:block;}
+.tile img{width:100%;height:100%;object-fit:cover;opacity:.82;transition:transform 1.1s cubic-bezier(.2,.7,.2,1),opacity .4s;}
+.tile:hover img{transform:scale(1.05);opacity:.92;}
+.tile .grad{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 45%,rgba(0,0,0,.6) 100%);}
+.tile .cap{position:absolute;left:28px;bottom:24px;right:28px;z-index:2;color:#fff;}
+.tile .cap h3{font-family:var(--serif);font-weight:300;font-size:32px;line-height:1;}
+.tile .cap .c{margin-top:8px;font-size:10.5px;text-transform:uppercase;letter-spacing:.2em;color:rgba(255,255,255,.82);}
+.t-a{grid-column:span 7;grid-row:span 2;}
+.t-b{grid-column:span 5;}
+.t-c{grid-column:span 5;}
+.t-d{grid-column:span 4;}
+.t-e{grid-column:span 4;}
+.t-f{grid-column:span 4;}
+
+/* philosophy split */
+.philo{display:grid;grid-template-columns:1fr 1fr;align-items:center;}
+.philo .fig{aspect-ratio:4/5;overflow:hidden;background:var(--paper-2);}
+.philo .fig img{width:100%;height:100%;object-fit:cover;}
+.philo .txt{padding:clamp(40px,6vw,100px);}
+.philo h2{font-family:var(--serif);font-weight:300;font-size:clamp(30px,3.6vw,52px);line-height:1.08;letter-spacing:-0.01em;}
+.philo h2 em{font-style:italic;}
+.philo p{margin-top:24px;font-size:16px;line-height:1.8;color:var(--ink-soft);font-weight:300;max-width:48ch;}
+.principles{display:grid;grid-template-columns:1fr 1fr 1fr;gap:26px;margin-top:46px;}
+.principles .n{font-family:var(--serif);font-size:15px;color:var(--bronze);border-top:1px solid var(--line);padding-top:14px;}
+.principles h4{font-size:13px;font-weight:600;letter-spacing:.02em;margin:11px 0 7px;}
+.principles p{margin:0;font-size:12.5px;color:var(--ink-soft);line-height:1.55;}
+
+/* spotlight full bleed */
+.spot{position:relative;height:84vh;min-height:560px;display:flex;align-items:flex-end;overflow:hidden;background:#15120d;}
+.spot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.84;}
+.spot .grad{position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.62),rgba(0,0,0,.06) 60%);}
+.spot .grad2{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 55%,rgba(0,0,0,.55) 100%);}
+.spot-in{position:relative;z-index:2;color:#fff;padding:clamp(40px,6vw,90px);max-width:640px;}
+.spot-in .loc{font-size:11px;text-transform:uppercase;letter-spacing:.2em;color:rgba(255,255,255,.82);}
+.spot-in h2{font-family:var(--serif);font-weight:300;font-size:clamp(34px,4.6vw,68px);line-height:1.02;margin:14px 0 18px;}
+.spot-in p{font-size:16px;line-height:1.7;color:rgba(255,255,255,.88);font-weight:300;max-width:46ch;margin-bottom:30px;}
+
+/* map cta */
+.mapcta{position:relative;height:70vh;min-height:480px;display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden;background:#15120d;}
+.mapcta img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.6;}
+.mapcta .grad{position:absolute;inset:0;background:rgba(0,0,0,.32);}
+.mapcta-in{position:relative;z-index:2;color:#fff;padding:0 24px;max-width:760px;}
+.mapcta h2{font-family:var(--serif);font-weight:300;font-size:clamp(36px,5.2vw,74px);line-height:1.02;}
+.mapcta p{margin:22px auto 34px;max-width:48ch;font-size:16px;line-height:1.7;color:rgba(255,255,255,.88);font-weight:300;}
+
+/* footer */
+.foot{border-top:1px solid var(--line);padding:clamp(60px,7vw,96px) 0 44px;}
+.foot-top{display:grid;grid-template-columns:2.2fr 1fr 1fr 1fr;gap:40px;}
+.foot h4{font-size:10.5px;text-transform:uppercase;letter-spacing:.2em;color:var(--ink-faint);margin-bottom:20px;}
+.foot a{display:block;font-size:13.5px;color:var(--ink-soft);padding:7px 0;transition:.2s;font-weight:300;}
+.foot a:hover{color:var(--ink);}
+.foot-brand .wordmark{font-size:18px;}
+.foot-brand p{margin-top:22px;font-size:14px;color:var(--ink-soft);line-height:1.7;max-width:36ch;font-weight:300;}
+.foot-bot{display:flex;justify-content:space-between;align-items:center;margin-top:60px;padding-top:28px;border-top:1px solid var(--line);font-size:12px;color:var(--ink-faint);flex-wrap:wrap;gap:14px;font-weight:300;}
+.foot-disc{max-width:60ch;line-height:1.6;}
+
+@media(max-width:920px){
+  .fgrid{grid-template-columns:1fr 1fr;}
+  .philo{grid-template-columns:1fr;}
+  .philo .fig{aspect-ratio:16/10;}
+  .principles{grid-template-columns:1fr;gap:18px;}
+  .dest{grid-auto-rows:180px;}
+  .t-a,.t-b,.t-c,.t-d,.t-e,.t-f{grid-column:span 6;grid-row:span 1;}
+  .foot-top{grid-template-columns:1fr 1fr;}
+}
+@media(max-width:560px){
+  .fgrid{grid-template-columns:1fr;}
+  .dsearch{flex-direction:column;}
+  .dsearch .field{border-right:0;border-bottom:1px solid var(--line);}
+  .dest{grid-template-columns:1fr;grid-auto-rows:230px;}
+  .t-a,.t-b,.t-c,.t-d,.t-e,.t-f{grid-column:auto;grid-row:auto;}
+  .sec-head{flex-direction:column;align-items:flex-start;gap:16px;}
+  .foot-top{grid-template-columns:1fr;gap:30px;}
+  .foot-bot{flex-direction:column;align-items:flex-start;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="site-nav"></nav>
+
+<!-- HERO -->
+<header class="hero">
+  <img id="heroImgA" class="hero-layer" alt="">
+  <img id="heroImgB" class="hero-layer" alt="">
+  <div class="hero-grad"></div>
+  <div class="hero-in">
+    <span class="eyebrow">A handpicked collection</span>
+    <h1>Somewhere<br><em>extraordinary</em></h1>
+    <p class="sub">The world's most inspiring boutique hotels, design retreats and unique places to stay — handpicked for an unforgettable experience.</p>
+    <form class="dsearch" action="explore.html" method="get">
+      <div class="field">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#A7A296" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+        <input name="q" placeholder="Where would you like to go?" autocomplete="off">
+      </div>
+      <button type="submit">Search</button>
+    </form>
+  </div>
+  <a class="hero-cap" id="heroCap" href="#"></a>
+  <div class="hero-scroll">Scroll to explore</div>
+</header>
+
+<!-- INTRO STATEMENT -->
+<section class="section center wrap" style="padding-bottom:clamp(40px,5vw,70px);">
+  <span class="eyebrow kicker">Outbound Stays</span>
+  <h2 class="h-display">A curated world of<br><em>extraordinary stays</em></h2>
+  <p class="lead-line">We seek out the most inspiring places to stay on earth — boutique hotels, design retreats, lodges and one-of-a-kind escapes — and gather the very best into a single collection, written about by people who travel for a living. Wherever you're headed, we hope to make the journey unforgettable.</p>
+</section>
+
+<!-- FEATURED STAYS -->
+<section class="section wrap" id="stays" style="padding-top:clamp(30px,4vw,60px);">
+  <div class="sec-head">
+    <div>
+      <span class="eyebrow" style="display:block;margin-bottom:16px;">The collection</span>
+      <h2>Handpicked <em>stays</em></h2>
+    </div>
+    <a href="explore.html" class="link-u">View all on the map</a>
+  </div>
+  <div class="fgrid" id="fgrid"></div>
+  <div class="center" style="margin-top:60px;">
+    <a href="explore.html" class="btn btn-outline">Explore the full collection</a>
+  </div>
+</section>
+
+<!-- DESTINATIONS -->
+<section class="section wrap" id="destinations" style="padding-top:0;">
+  <div class="sec-head">
+    <div>
+      <span class="eyebrow" style="display:block;margin-bottom:16px;">Where to go</span>
+      <h2>Explore by <em>destination</em></h2>
+    </div>
+    <a href="explore.html" class="link-u">See everywhere</a>
+  </div>
+  <div class="dest" id="dest"></div>
+</section>
+
+<!-- PHILOSOPHY -->
+<section id="promise">
+  <div class="philo">
+    <div class="fig"><img id="philoImg" alt=""></div>
+    <div class="txt">
+      <span class="eyebrow" style="display:block;margin-bottom:22px;">Our promise</span>
+      <h2>Chosen with care,<br>for the way you <em>travel</em>.</h2>
+      <p>We spend our days searching out the most beautiful and characterful places to stay — the hotels, retreats and hideaways worth crossing the world for — and bring only the best together in one place. However and wherever you travel, we hope they make your trip something to remember.</p>
+      <div class="principles">
+        <div><div class="n">01</div><h4>Genuinely special</h4><p>Only the most beautiful and characterful places earn a place in the collection.</p></div>
+        <div><div class="n">02</div><h4>Character first</h4><p>Design, atmosphere and a real sense of place over star counts.</p></div>
+        <div><div class="n">03</div><h4>Made for the journey</h4><p>Stays chosen for the experience — places worth travelling for.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SPOTLIGHT -->
+<section class="spot">
+  <img id="spotImg" alt="">
+  <div class="grad"></div><div class="grad2"></div>
+  <div class="spot-in">
+    <span class="eyebrow" style="color:rgba(255,255,255,.82);display:block;margin-bottom:14px;">Stay of the week</span>
+    <div class="loc" id="spotLoc"></div>
+    <h2 class="serif" id="spotName"></h2>
+    <p id="spotDesc"></p>
+    <a class="btn btn-light" id="spotBtn" href="#">Discover this stay</a>
+  </div>
+</section>
+
+<!-- MAP CTA -->
+<section class="mapcta">
+  <img id="mapImg" alt="">
+  <div class="grad"></div>
+  <div class="mapcta-in">
+    <span class="eyebrow" style="color:rgba(255,255,255,.82);display:block;margin-bottom:18px;">The whole collection, one map</span>
+    <h2>Find your next escape</h2>
+    <p>Pan across continents and pin down somewhere remarkable — filter by region, price and the kind of place you're after.</p>
+    <a href="explore.html" class="btn btn-light">Open the world map</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <span class="wordmark">Outbound <span class="thin">Stays</span></span>
+        <p>A handpicked collection of the world's most inspiring places to stay. Chosen on merit, for the kind of experiences that stay with you for life.</p>
+      </div>
+      <div><h4>Explore</h4><a href="explore.html">World map</a><a href="destinations.html">Destinations</a><a href="experiences.html">Experiences</a></div>
+      <div><h4>Outbound</h4><a href="list-hotel.html">List your hotel</a><a href="index.html#promise">Our promise</a><a href="#">The journal</a></div>
+      <div><h4>Follow</h4><a href="https://www.instagram.com/outboundstays/" target="_blank" rel="noopener">Instagram</a><a href="https://www.instagram.com/mediterravie/" target="_blank" rel="noopener">Mediterravie</a><a href="#newsletter" data-newsletter>Newsletter</a></div>
+    </div>
+    <div class="foot-bot">
+      <span>© 2026 Outbound Stays</span>
+      <span class="foot-disc">Some links are affiliate links. If you book through them we may earn a commission, at no cost to you. It never influences what we choose to feature.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="data/hotels.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="js/nav.js"></script>
+<script>
+const H = window.HOTELS || [];
+const fmt = n => n.toLocaleString('en-US');
+const tierLabel = {'$':'Considered','$$':'Boutique','$$$':'Luxury','$$$$':'Rarefied'};
+// CURATED HOMEPAGE SELECTION — only these hotels ever appear as covers on the homepage.
+const FEATURED_IDS = [876,939,117,910,628,853,119,846,129,886,1098,957,1051,865,183];
+const covers = FEATURED_IDS.map(id=>H.find(h=>h.id===id)).filter(Boolean);
+
+function shuf(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+// verify an image actually loads (with timeout) — resolves true/false
+function check(url){
+  return new Promise(res=>{
+    const im=new Image(); let done=false;
+    const t=setTimeout(()=>{if(!done){done=true;res(false);}},6000);
+    im.onload=()=>{if(!done){done=true;clearTimeout(t);res(im.naturalWidth>2);}};
+    im.onerror=()=>{if(!done){done=true;clearTimeout(t);res(false);}};
+    im.src=url;
+  });
+}
+// curated spread across regions from a given (verified) source
+function spread(n,skip,src){
+  const byR={}; src.forEach(h=>{(byR[h.region]=byR[h.region]||[]).push(h);});
+  const out=[];let i=0;const regions=Object.keys(byR);
+  while(out.length<n && i<200){regions.forEach(r=>{const a=byR[r];if(a&&a[i]&&out.length<n&&a[i].id!==skip)out.push(a[i]);});i++;}
+  return out;
+}
+
+(async function build(){
+  // Build a shuffled candidate set with each region represented (random per load
+  // → a different hero/selection every refresh). Then verify their photos.
+  const byR={}; covers.forEach(h=>(byR[h.region]=byR[h.region]||[]).push(h));
+  let candidates=[];
+  Object.values(byR).forEach(arr=>{ candidates.push(...shuf(arr).slice(0,18)); });
+  candidates = shuf(candidates);
+
+  const checks = await Promise.all(candidates.map(h=>check(h.img)));
+  let verified = candidates.filter((h,i)=>checks[i]);
+  if(verified.length < 14) verified = candidates; // safety: never end up empty
+
+  // ---- HERO (single image, picked per load, never rotating) ----
+  const hero = verified[0];
+  const layerA = document.getElementById('heroImgA');
+  const heroCap = document.getElementById('heroCap');
+  const showHero = ()=>{ layerA.style.opacity = '0.9'; };
+  layerA.onload = showHero;
+  layerA.src = hero.img;
+  if(layerA.complete && layerA.naturalWidth>2) showHero();
+  heroCap.innerHTML = `<b>${hero.name}</b>${hero.city?hero.city+', ':''}${hero.country}<span class="ar">↗</span>`;
+  heroCap.href = 'hotel.html?id='+hero.id;
+  heroCap.style.opacity = 1;
+
+  // ---- FEATURED STAYS (the full curated selection, in listed order) ----
+  const feat = FEATURED_IDS.map(id=>H.find(h=>h.id===id)).filter(Boolean);
+  document.getElementById('fgrid').innerHTML = feat.map(h=>`
+    <a class="fcard" href="hotel.html?id=${h.id}">
+      <div class="fig"><img loading="lazy" src="${h.img}" alt="${h.name}">
+        <div class="save"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1B1A17" stroke-width="1.5"><path d="M19 14c1.5-1.5 3-3.3 3-5.5C22 5.4 19.9 3 17 3c-1.8 0-3.4 1-4.5 2.5C11.4 4 9.8 3 8 3 5.1 3 3 5.4 3 8.5c0 2.2 1.5 4 3 5.5l6 6 7-6z"/></svg></div>
+      </div>
+      <div class="meta">
+        <div class="loc">${h.city||h.country}</div>
+        <div class="name">${h.name}</div>
+        <div class="row"><span class="desc">${h.desc}</span><span class="tier">${h.price}</span></div>
+      </div>
+    </a>`).join('');
+
+  // ---- DESTINATIONS TILES (verified, per region) ----
+  const used=new Set(feat.map(f=>f.id)); used.add(hero.id);
+  function regionPic(r){const l=verified.filter(h=>h.region===r&&!used.has(h.id));const p=l[0]||verified.filter(h=>h.region===r)[0]||verified[0];if(p)used.add(p.id);return p?p.img:'';}
+  const destMeta=[['Europe','t-a'],['Asia','t-b'],['Americas','t-c'],['Africa & Middle East','t-d'],['Oceania','t-e']];
+  let destHTML = destMeta.map(([r,cls])=>{
+    const count=H.filter(h=>h.region===r).length;
+    return `<a class="tile ${cls}" href="explore.html?region=${encodeURIComponent(r)}">
+      <img loading="lazy" src="${regionPic(r)}" alt="${r}"><div class="grad"></div>
+      <div class="cap"><h3>${r}</h3><div class="c">${fmt(count)} stays</div></div></a>`;
+  }).join('');
+  destHTML += `<a class="tile t-f" href="explore.html">
+    <img loading="lazy" src="${regionPic('Europe')||verified[0].img}" alt=""><div class="grad"></div>
+    <div class="cap"><h3>The whole map</h3><div class="c">${fmt(H.length)} stays worldwide</div></div></a>`;
+  document.getElementById('dest').innerHTML = destHTML;
+
+  // ---- PHILOSOPHY (use a verified primary image) ----
+  const philo = verified.find(h=>!used.has(h.id)) || verified[1] || hero; used.add(philo.id);
+  document.getElementById('philoImg').src = philo.img;
+
+  // ---- SPOTLIGHT ----
+  const spot = verified.find(h=>!used.has(h.id)) || verified[2] || hero;
+  document.getElementById('spotImg').src = spot.img;
+  document.getElementById('spotLoc').textContent = (spot.city?spot.city+', ':'')+spot.country;
+  document.getElementById('spotName').textContent = spot.name;
+  document.getElementById('spotDesc').textContent = spot.desc;
+  document.getElementById('spotBtn').href = 'hotel.html?id='+spot.id;
+  used.add(spot.id);
+
+  // ---- MAP CTA ----
+  const mapH = verified.find(h=>!used.has(h.id)) || verified[3] || hero;
+  document.getElementById('mapImg').src = mapH.img;
+})();
+</script>
+</body>
+</html>

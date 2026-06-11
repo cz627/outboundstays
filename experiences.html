@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Experiences — Outbound Stays</title>
+<meta name="description" content="Find your stay by the way you want to travel — mountains, wine, surfing, safari, wellness and more.">
+<link rel="canonical" href="https://outboundstays.com/experiences.html">
+<link rel="icon" type="image/png" href="uploads/OUTBOUND%20Icon.png">
+<link rel="apple-touch-icon" href="uploads/OUTBOUND%20Icon.png">
+<meta name="theme-color" content="#1B1A17">
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Outbound Stays">
+<meta property="og:title" content="Experiences — Outbound Stays">
+<meta property="og:description" content="Find your stay by the way you want to travel — mountains, wine, surfing, safari, wellness and more.">
+<meta property="og:url" content="https://outboundstays.com/experiences.html">
+<meta property="og:image" content="https://outboundstays.com/uploads/OUTBOUND%20Icon.png">
+<!-- Twitter -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Experiences — Outbound Stays">
+<meta name="twitter:description" content="Find your stay by the way you want to travel — mountains, wine, surfing, safari, wellness and more.">
+<meta name="twitter:image" content="https://outboundstays.com/uploads/OUTBOUND%20Icon.png">
+<link rel="stylesheet" href="css/luxe.css">
+<style>
+/* page header */
+.page-head{padding:clamp(64px,8vw,120px) 0 clamp(40px,5vw,64px);text-align:center;}
+.page-head .eyebrow{display:block;margin-bottom:22px;}
+.page-head h1{font-family:var(--serif);font-weight:300;font-size:clamp(40px,6vw,82px);line-height:1.02;letter-spacing:-0.01em;}
+.page-head h1 em{font-style:italic;}
+.page-head .lead{max-width:58ch;margin:26px auto 0;font-size:clamp(15px,1.4vw,18px);line-height:1.75;color:var(--ink-soft);font-weight:300;}
+
+/* experience grid */
+.exp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;padding-bottom:clamp(70px,9vw,130px);}
+.ecard{position:relative;display:block;aspect-ratio:4/5;overflow:hidden;background:#1a1611;}
+.ecard .cover{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.86;transition:transform 1.1s cubic-bezier(.2,.7,.2,1),opacity .4s;}
+.ecard:hover .cover{transform:scale(1.05);opacity:.96;}
+.ecard .grad{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 38%,rgba(0,0,0,.16) 62%,rgba(0,0,0,.66) 100%);z-index:1;}
+.ecard .cap{position:absolute;left:26px;right:26px;bottom:24px;z-index:2;color:#fff;}
+.ecard .cap h3{font-family:var(--serif);font-weight:300;font-size:clamp(26px,2.4vw,34px);line-height:1.02;}
+.ecard .cap .sub{margin-top:7px;font-size:13px;line-height:1.4;color:rgba(255,255,255,.82);font-weight:300;font-style:italic;font-family:var(--serif);}
+.ecard .cap .c{margin-top:13px;font-size:10px;text-transform:uppercase;letter-spacing:.2em;color:rgba(255,255,255,.74);display:flex;align-items:center;gap:8px;}
+.ecard .cap .c .arr{transition:transform .3s ease;}
+.ecard:hover .cap .c .arr{transform:translateX(5px);}
+
+@media(max-width:920px){.exp-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:560px){
+  .exp-grid{grid-template-columns:1fr;}
+  .ecard{aspect-ratio:3/2;}
+}
+
+/* footer (shared markup) */
+.foot{border-top:1px solid var(--line);padding:clamp(60px,7vw,96px) 0 44px;}
+.foot-top{display:grid;grid-template-columns:2.2fr 1fr 1fr 1fr;gap:40px;}
+.foot h4{font-size:10.5px;text-transform:uppercase;letter-spacing:.2em;color:var(--ink-faint);margin-bottom:20px;}
+.foot a{display:block;font-size:13.5px;color:var(--ink-soft);padding:7px 0;transition:.2s;font-weight:300;}
+.foot a:hover{color:var(--ink);}
+.foot-brand .wordmark{font-size:18px;}
+.foot-brand p{margin-top:22px;font-size:14px;color:var(--ink-soft);line-height:1.7;max-width:36ch;font-weight:300;}
+.foot-bot{display:flex;justify-content:space-between;align-items:center;margin-top:60px;padding-top:28px;border-top:1px solid var(--line);font-size:12px;color:var(--ink-faint);flex-wrap:wrap;gap:14px;font-weight:300;}
+.foot-disc{max-width:60ch;line-height:1.6;}
+@media(max-width:920px){.foot-top{grid-template-columns:1fr 1fr;}}
+@media(max-width:560px){.foot-top{grid-template-columns:1fr;gap:30px;}.foot-bot{flex-direction:column;align-items:flex-start;}}
+</style>
+</head>
+<body>
+
+<nav id="site-nav" data-active="experiences"></nav>
+
+<header class="page-head wrap">
+  <span class="eyebrow">By experience</span>
+  <h1>Stays for the way<br><em>you want to travel</em></h1>
+  <p class="lead">However you like to escape — high in the mountains, deep in the vines, or right in the thick of a great city — we've gathered a handpicked few for every kind of trip. A small selection of our favourites, by experience.</p>
+</header>
+
+<section class="wrap">
+  <div class="exp-grid" id="expGrid"></div>
+</section>
+
+<!-- FOOTER -->
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <span class="wordmark">Outbound <span class="thin">Stays</span></span>
+        <p>A handpicked collection of the world's most inspiring places to stay. Chosen on merit, for the kind of experiences that stay with you for life.</p>
+      </div>
+      <div><h4>Explore</h4><a href="explore.html">World map</a><a href="destinations.html">Destinations</a><a href="experiences.html">Experiences</a></div>
+      <div><h4>Outbound</h4><a href="list-hotel.html">List your hotel</a><a href="index.html#promise">Our promise</a><a href="#">The journal</a></div>
+      <div><h4>Follow</h4><a href="https://www.instagram.com/outboundstays/" target="_blank" rel="noopener">Instagram</a><a href="https://www.instagram.com/mediterravie/" target="_blank" rel="noopener">Mediterravie</a><a href="#newsletter" data-newsletter>Newsletter</a></div>
+    </div>
+    <div class="foot-bot">
+      <span>© 2026 Outbound Stays</span>
+      <span class="foot-disc">Some links are affiliate links. If you book through them we may earn a commission, at no cost to you. It never influences what we choose to feature.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="data/hotels.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="js/nav.js"></script>
+<script>
+const H = window.HOTELS || [];
+const fmt = n => n.toLocaleString('en-US');
+
+// Curated order + editorial subtitle for each experience category.
+const CATS = [
+  ['Mountains',   'High places, big silence'],
+  ['Hiking',      'Trails from the doorstep'],
+  ['Skiing',      'Snow-side and slope-close'],
+  ['Nature',      'Deep in the wild'],
+  ['Countryside', 'Slow days in green country'],
+  ['Cabin',       'Small, snug and off-grid'],
+  ['Beaches',     'Toes-in-the-sand mornings'],
+  ['Island',      'Surrounded by sea'],
+  ['Surfing',     'Where the swell rolls in'],
+  ['Gourmet',     'Tables worth the journey'],
+  ['Wine',        'Among the vines'],
+  ['Culture',     'Steeped in history'],
+  ['City',        'In the thick of it'],
+  ['Castle',      'Sleep inside the storybook'],
+  ['Farmhouse',   'Rustic walls, modern comfort'],
+  ['Private',     'Yours, and yours alone'],
+  ['Adults-only', 'Grown-up calm'],
+  ['Family',      'Room for everyone'],
+  ['Wellness',    'Rest, restore, return'],
+  ['Eco',         'Lightly on the land'],
+  ['Safari',      'Out where the wild things roam'],
+  ['Luxury',      'No detail spared'],
+];
+
+const slug = s => s.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,'');
+const count = exp => H.filter(h => (h.exp||'').trim() === exp).length;
+
+// Map each experience category to its uploaded cover image.
+const COVERS = {
+  'Mountains':'uploads/mountains.avif','Hiking':'uploads/hiking.avif','Skiing':'uploads/skiing.avif',
+  'Nature':'uploads/nature.avif','Countryside':'uploads/countryside.avif','Cabin':'uploads/cabin.avif',
+  'Beaches':'uploads/beaches.avif','Island':'uploads/island.avif','Surfing':'uploads/surfing.avif',
+  'Gourmet':'uploads/gourmet.avif','Wine':'uploads/wine.avif','Culture':'uploads/cultural .jpg',
+  'City':'uploads/city.avif','Castle':'uploads/castle.avif','Farmhouse':'uploads/farmhouse.avif',
+  'Private':'uploads/private villas.avif','Adults-only':'uploads/adults only.avif','Family':'uploads/family.avif',
+  'Wellness':'uploads/wellness.avif','Eco':'uploads/eco friendly.avif','Safari':'uploads/safari.avif','Luxury':'uploads/luxury.avif'
+};
+
+document.getElementById('expGrid').innerHTML = CATS
+  .filter(([exp]) => count(exp) > 0)
+  .map(([exp, sub]) => {
+    const n = count(exp);
+    const src = COVERS[exp];
+    const cover = src
+      ? `<img class="cover" loading="lazy" src="${encodeURI(src)}" alt="${exp}">`
+      : `<div class="cover-ph"><span class="tag">cover · ${exp.toLowerCase()}</span></div>`;
+    return `
+    <a class="ecard" href="explore.html?exp=${encodeURIComponent(exp)}">
+      ${cover}
+      <div class="grad"></div>
+      <div class="cap">
+        <h3>${exp}</h3>
+        <div class="sub">${sub}</div>
+        <div class="c">${fmt(n)} ${n === 1 ? 'stay' : 'stays'} <span class="arr">→</span></div>
+      </div>
+    </a>`;
+  }).join('');
+</script>
+</body>
+</html>

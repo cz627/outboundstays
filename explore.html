@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Explore the map — Outbound Stays</title>
+<meta name="description" content="Explore our full collection of distinctive stays on an interactive world map. Filter live by region, price tier, and experience.">
+<link rel="canonical" href="https://outboundstays.com/explore.html">
+<link rel="icon" type="image/png" href="uploads/OUTBOUND%20Icon.png">
+<link rel="apple-touch-icon" href="uploads/OUTBOUND%20Icon.png">
+<meta name="theme-color" content="#1B1A17">
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Outbound Stays">
+<meta property="og:title" content="Explore the map — Outbound Stays">
+<meta property="og:description" content="Explore our full collection of distinctive stays on an interactive world map. Filter live by region, price tier, and experience.">
+<meta property="og:url" content="https://outboundstays.com/explore.html">
+<meta property="og:image" content="https://outboundstays.com/uploads/OUTBOUND%20Icon.png">
+<!-- Twitter -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Explore the map — Outbound Stays">
+<meta name="twitter:description" content="Explore our full collection of distinctive stays on an interactive world map. Filter live by region, price tier, and experience.">
+<meta name="twitter:image" content="https://outboundstays.com/uploads/OUTBOUND%20Icon.png">
+<link rel="stylesheet" href="css/luxe.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css">
+<style>
+html,body{height:100%;overflow:hidden;}
+.app{display:flex;flex-direction:column;height:100vh;}
+.nav{flex:0 0 auto;}
+.nav-inner{height:68px;}
+.stage{flex:1;display:flex;min-height:0;}
+
+/* sidebar */
+.side{flex:0 0 clamp(360px,32vw,440px);display:flex;flex-direction:column;background:#fff;border-right:1px solid var(--line);min-height:0;z-index:5;}
+
+.filt{padding:24px 30px 20px;border-bottom:1px solid var(--line);display:flex;flex-direction:column;gap:15px;}
+.count{font-size:12px;letter-spacing:.04em;color:var(--ink-faint);}
+.count b{color:var(--bronze);font-weight:600;}
+.f-search{display:flex;align-items:center;gap:11px;border:1px solid var(--line);padding:0 14px;}
+.f-search input{flex:1;border:0;background:transparent;font-family:var(--sans);font-size:14px;color:var(--ink);padding:13px 0;outline:none;}
+.f-search input::placeholder{color:var(--ink-faint);}
+.chips{display:flex;flex-wrap:wrap;gap:7px;}
+.chip{font-size:11px;font-weight:400;letter-spacing:.06em;padding:8px 14px;border:1px solid var(--line);background:#fff;color:var(--ink-soft);transition:.15s;white-space:nowrap;text-transform:uppercase;}
+.chip:hover{border-color:var(--ink);color:var(--ink);}
+.chip.on{background:var(--ink);border-color:var(--ink);color:#fff;}
+.frow{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.flabel{font-size:10px;text-transform:uppercase;letter-spacing:.2em;color:var(--ink-faint);width:100%;margin-bottom:-4px;}
+
+.list{flex:1;overflow-y:auto;min-height:0;}
+.lcard{display:flex;gap:15px;padding:17px 30px;border-bottom:1px solid var(--line-soft);cursor:pointer;transition:background .15s;}
+.lcard:hover{background:var(--paper-2);}
+.lcard.active{background:var(--paper-2);box-shadow:inset 2px 0 0 var(--bronze);}
+.lthumb{flex:0 0 88px;height:104px;overflow:hidden;background:var(--paper-2);}
+.lthumb img{width:100%;height:100%;object-fit:cover;}
+.lbody{flex:1;min-width:0;}
+.lloc{font-size:10px;text-transform:uppercase;letter-spacing:.16em;color:var(--ink-faint);}
+.lname{font-family:var(--serif);font-size:20px;line-height:1.1;margin:5px 0 7px;}
+.ldesc{font-size:12.5px;color:var(--ink-soft);font-weight:300;line-height:1.45;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+.lprice{font-size:11px;color:var(--ink-soft);letter-spacing:.08em;margin-top:7px;}
+.empty{padding:54px 30px;text-align:center;color:var(--ink-faint);}
+.empty .serif{font-size:24px;color:var(--ink);display:block;margin-bottom:8px;font-weight:300;}
+
+/* map */
+.mapwrap{flex:1;position:relative;min-width:0;}
+#map{position:absolute;inset:0;background:#EEEBE5;}
+.leaflet-container{font-family:var(--sans);background:#EEEBE5;}
+.leaflet-tile-pane{filter:saturate(.78) brightness(1.03);}
+
+.pin{width:13px;height:13px;border-radius:50%;background:var(--ink);border:2.5px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.35);transition:transform .15s,background .15s;}
+.pin-wrap{cursor:pointer;}
+.pin-wrap:hover .pin,.pin-wrap.active .pin{transform:scale(1.5);background:var(--bronze);}
+.pin-wrap.active .pin{box-shadow:0 0 0 6px rgba(154,126,82,.22),0 1px 4px rgba(0,0,0,.35);}
+
+.cl{background:rgba(27,26,23,.92);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--sans);font-weight:500;font-size:13px;border:2.5px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,.25);}
+
+.leaflet-popup-content-wrapper{border-radius:0;padding:0;overflow:hidden;box-shadow:0 18px 44px rgba(0,0,0,.24);}
+.leaflet-popup-content{margin:0;width:250px!important;}
+.leaflet-popup-tip{background:#fff;}
+.pop-fig{height:150px;overflow:hidden;background:var(--paper-2);}
+.pop-fig img{width:100%;height:100%;object-fit:cover;}
+.pop-body{padding:15px 17px 17px;background:#fff;}
+.pop-loc{font-size:10px;text-transform:uppercase;letter-spacing:.16em;color:var(--ink-faint);}
+.pop-name{font-family:var(--serif);font-size:21px;line-height:1.08;margin:6px 0 11px;}
+.pop-link{font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.14em;color:var(--bronze);}
+
+.map-badge{position:absolute;top:18px;right:18px;z-index:500;background:rgba(255,255,255,.94);border:1px solid var(--line);padding:10px 16px;font-size:10.5px;text-transform:uppercase;letter-spacing:.16em;color:var(--ink-soft);backdrop-filter:blur(8px);}
+.reset{position:absolute;bottom:26px;right:18px;z-index:500;}
+.leaflet-bar a,.leaflet-control-zoom a{color:var(--ink)!important;background:#fff!important;border-radius:0!important;}
+
+.viewtog{display:none;}
+@media(max-width:880px){
+  .stage{flex-direction:column;position:relative;}
+  .side{flex:1;border-right:0;}
+  .mapwrap{position:absolute;inset:0;z-index:20;}
+  body.map-view .side{display:none;}
+  body:not(.map-view) .mapwrap{display:none;}
+  .viewtog{display:inline-flex;position:fixed;bottom:22px;left:50%;transform:translateX(-50%);z-index:900;}
+}
+</style>
+</head>
+<body class="map-view">
+<div class="app">
+
+<nav id="site-nav" data-active="explore"></nav>
+
+<div class="stage">
+  <aside class="side">
+    <div class="filt">
+      <div class="f-search">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#A7A296" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+        <input id="q" placeholder="Search hotel, city or country…" autocomplete="off">
+      </div>
+      <div class="frow">
+        <span class="flabel">Region</span>
+        <div class="chips" id="regionChips"></div>
+      </div>
+      <div class="frow">
+        <span class="flabel">Price</span>
+        <div class="chips" id="priceChips">
+          <button class="chip" data-price="$">$</button>
+          <button class="chip" data-price="$$">$$</button>
+          <button class="chip" data-price="$$$">$$$</button>
+          <button class="chip" data-price="$$$$">$$$$</button>
+        </div>
+      </div>
+      <div class="count"><b id="cnt">—</b> stays showing</div>
+    </div>
+    <div class="list thin-scroll" id="list"></div>
+  </aside>
+
+  <div class="mapwrap">
+    <div id="map"></div>
+    <div class="map-badge" id="badge">Outbound Stays · World</div>
+    <button class="btn btn-dark reset" id="resetBtn" style="padding:12px 20px;">Reset view</button>
+  </div>
+</div>
+</div>
+
+<button class="btn btn-dark viewtog" id="viewtog">View list</button>
+
+<script src="data/hotels.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="js/nav.js"></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+<script>
+const H = window.HOTELS || [];
+const fmt = n => n.toLocaleString('en-US');
+const tierLabel = {'$':'Considered','$$':'Boutique','$$$':'Luxury','$$$$':'Rarefied'};
+const REGIONS = ['Europe','Americas','Asia','Africa & Middle East','Oceania'];
+const params = new URLSearchParams(location.search);
+const state = { q:(params.get('q')||'').trim(), region:params.get('region')||'', exp:(params.get('exp')||'').trim(), country:(params.get('country')||'').trim(), prices:new Set() };
+
+const map = L.map('map',{zoomControl:false,worldCopyJump:true,minZoom:2}).setView([30,8],3);
+L.control.zoom({position:'bottomleft'}).addTo(map);
+L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',{attribution:'© OpenStreetMap · © CARTO',subdomains:'abcd',maxZoom:19}).addTo(map);
+
+const cluster = L.markerClusterGroup({
+  maxClusterRadius:48, showCoverageOnHover:false,
+  iconCreateFunction:c=>{const n=c.getChildCount();const s=n<10?34:n<50?40:n<200?48:56;return L.divIcon({html:`<div class="cl" style="width:${s}px;height:${s}px;">${n}</div>`,className:'',iconSize:[s,s]});}
+});
+map.addLayer(cluster);
+
+const markers={};
+function makeMarker(h){
+  const icon=L.divIcon({className:'pin-wrap',html:'<div class="pin"></div>',iconSize:[18,18],iconAnchor:[9,9]});
+  const m=L.marker([h.lat,h.lng],{icon}); m.hotel=h;
+  m.bindPopup(`<div class="pop-fig"><img src="${h.img}" alt=""></div><div class="pop-body"><div class="pop-loc">${h.city||h.country}</div><div class="pop-name">${h.name}</div><a class="pop-link" href="hotel.html?id=${h.id}">View this stay →</a></div>`,{closeButton:true,minWidth:250,maxWidth:250});
+  m.on('click',()=>setActive(h.id,false));
+  return m;
+}
+
+function matches(h){
+  if(state.region && h.region!==state.region) return false;
+  if(state.country && h.country!==state.country) return false;
+  if(state.exp && (h.exp||'').trim()!==state.exp) return false;
+  if(state.prices.size && !state.prices.has(h.price)) return false;
+  if(state.q){const q=state.q.toLowerCase();const hay=(h.name+' '+h.city+' '+h.country+' '+h.region+' '+h.exp+' '+h.desc).toLowerCase();if(!hay.includes(q))return false;}
+  return true;
+}
+
+function render(){
+  const shown=H.filter(matches);
+  document.getElementById('cnt').textContent=fmt(shown.length);
+  cluster.clearLayers();
+  const layers=[];
+  shown.forEach(h=>{if(!markers[h.id])markers[h.id]=makeMarker(h);layers.push(markers[h.id]);});
+  cluster.addLayers(layers);
+  const list=document.getElementById('list');
+  if(shown.length===0){list.innerHTML='<div class="empty"><span class="serif">Nothing here yet</span>Try widening your search or clearing a filter.</div>';return;}
+  const slice=shown.slice(0,240);
+  list.innerHTML=slice.map(h=>`
+    <div class="lcard" data-id="${h.id}">
+      <div class="lthumb"><img loading="lazy" src="${h.img}" alt=""></div>
+      <div class="lbody">
+        <div class="lloc">${h.city||h.country}</div>
+        <div class="lname">${h.name}</div>
+        <div class="ldesc">${h.desc||(h.region+' · '+tierLabel[h.price])}</div>
+        <div class="lprice">${h.price} · ${tierLabel[h.price]}</div>
+      </div>
+    </div>`).join('')+(shown.length>slice.length?`<div class="empty" style="padding:26px;font-size:12px;">+ ${fmt(shown.length-slice.length)} more on the map — zoom in or refine to list them.</div>`:'');
+  list.querySelectorAll('.lcard').forEach(el=>el.addEventListener('click',()=>setActive(+el.dataset.id,true)));
+  if((state.region||state.prices.size||state.q||state.exp||state.country)&&shown.length){const grp=L.featureGroup(layers);try{map.fitBounds(grp.getBounds().pad(0.18),{maxZoom:7,animate:true});}catch(e){}}
+  updateBadge();
+}
+
+function setActive(id,fly){
+  document.querySelectorAll('.lcard').forEach(el=>el.classList.toggle('active',+el.dataset.id===id));
+  Object.values(markers).forEach(m=>{const el=m._icon;if(el)el.classList.toggle('active',m.hotel.id===id);});
+  const h=H.find(x=>x.id===id);if(!h)return;const m=markers[id];
+  if(fly&&m){map.flyTo([h.lat,h.lng],Math.max(map.getZoom(),9),{duration:.7});setTimeout(()=>cluster.zoomToShowLayer(m,()=>m.openPopup()),720);}
+  const card=document.querySelector('.lcard.active');
+  if(card&&!fly)card.parentNode.scrollTop=card.offsetTop-170;
+}
+
+function updateBadge(){const p=[];p.push(state.country||state.region||'World');if(state.exp)p.push(state.exp);if(state.prices.size)p.push([...state.prices].join(' '));if(state.q)p.push('“'+state.q+'”');document.getElementById('badge').textContent='Outbound Stays · '+p.join(' · ');}
+
+const rc=document.getElementById('regionChips');
+rc.innerHTML=REGIONS.map(r=>`<button class="chip" data-region="${r}">${r}</button>`).join('');
+rc.querySelectorAll('.chip').forEach(c=>c.addEventListener('click',()=>{const r=c.dataset.region;state.region=state.region===r?'':r;rc.querySelectorAll('.chip').forEach(x=>x.classList.toggle('on',x.dataset.region===state.region));render();}));
+document.querySelectorAll('#priceChips .chip').forEach(c=>c.addEventListener('click',()=>{const p=c.dataset.price;if(state.prices.has(p))state.prices.delete(p);else state.prices.add(p);c.classList.toggle('on',state.prices.has(p));render();}));
+const qEl=document.getElementById('q');qEl.value=state.q;let t;qEl.addEventListener('input',()=>{clearTimeout(t);t=setTimeout(()=>{state.q=qEl.value.trim();render();},220);});
+document.getElementById('resetBtn').addEventListener('click',()=>{state.q='';state.region='';state.exp='';state.country='';state.prices.clear();qEl.value='';rc.querySelectorAll('.chip').forEach(x=>x.classList.remove('on'));document.querySelectorAll('#priceChips .chip').forEach(x=>x.classList.remove('on'));map.flyTo([30,8],3,{duration:.7});render();});
+if(state.region)rc.querySelectorAll('.chip').forEach(x=>x.classList.toggle('on',x.dataset.region===state.region));
+const vt=document.getElementById('viewtog');vt.addEventListener('click',()=>{document.body.classList.toggle('map-view');vt.textContent=document.body.classList.contains('map-view')?'View list':'View map';setTimeout(()=>map.invalidateSize(),60);});
+
+render();
+</script>
+</body>
+</html>

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Destinations — Outbound Stays</title>
+<meta name="description" content="Browse exceptional places to stay by destination — country by country, region by region.">
+<link rel="canonical" href="https://outboundstays.com/destinations.html">
+<link rel="icon" type="image/png" href="uploads/OUTBOUND%20Icon.png">
+<link rel="apple-touch-icon" href="uploads/OUTBOUND%20Icon.png">
+<meta name="theme-color" content="#1B1A17">
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Outbound Stays">
+<meta property="og:title" content="Destinations — Outbound Stays">
+<meta property="og:description" content="Browse exceptional places to stay by destination — country by country, region by region.">
+<meta property="og:url" content="https://outboundstays.com/destinations.html">
+<meta property="og:image" content="https://outboundstays.com/uploads/OUTBOUND%20Icon.png">
+<!-- Twitter -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Destinations — Outbound Stays">
+<meta name="twitter:description" content="Browse exceptional places to stay by destination — country by country, region by region.">
+<meta name="twitter:image" content="https://outboundstays.com/uploads/OUTBOUND%20Icon.png">
+<link rel="stylesheet" href="css/luxe.css">
+<style>
+.page-head{padding:clamp(64px,8vw,120px) 0 clamp(40px,5vw,60px);text-align:center;}
+.page-head .eyebrow{display:block;margin-bottom:22px;}
+.page-head h1{font-family:var(--serif);font-weight:300;font-size:clamp(40px,6vw,82px);line-height:1.02;letter-spacing:-0.01em;}
+.page-head h1 em{font-style:italic;}
+.page-head .lead{max-width:56ch;margin:26px auto 0;font-size:clamp(15px,1.4vw,18px);line-height:1.75;color:var(--ink-soft);font-weight:300;}
+
+/* region tiles — editorial mosaic */
+.dest{display:grid;grid-template-columns:repeat(12,1fr);gap:14px;grid-auto-rows:240px;padding-bottom:clamp(60px,7vw,96px);}
+.tile{position:relative;overflow:hidden;background:#1a1611;display:block;}
+.tile img{width:100%;height:100%;object-fit:cover;opacity:.82;transition:transform 1.1s cubic-bezier(.2,.7,.2,1),opacity .4s;}
+.tile:hover img{transform:scale(1.05);opacity:.94;}
+.tile .grad{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 42%,rgba(0,0,0,.62) 100%);z-index:1;}
+.tile .cap{position:absolute;left:30px;bottom:26px;right:30px;z-index:2;color:#fff;}
+.tile .cap h3{font-family:var(--serif);font-weight:300;font-size:clamp(28px,2.8vw,40px);line-height:1;}
+.tile .cap .c{margin-top:10px;font-size:10.5px;text-transform:uppercase;letter-spacing:.2em;color:rgba(255,255,255,.82);display:flex;align-items:center;gap:8px;}
+.tile .cap .c .arr{transition:transform .3s ease;}
+.tile:hover .cap .c .arr{transform:translateX(5px);}
+.t-a{grid-column:span 7;grid-row:span 2;}
+.t-b{grid-column:span 5;}
+.t-c{grid-column:span 5;}
+.t-d{grid-column:span 4;}
+.t-e{grid-column:span 4;}
+.t-f{grid-column:span 4;}
+
+/* country index */
+.country-sec{padding:clamp(40px,5vw,72px) 0 clamp(70px,9vw,130px);border-top:1px solid var(--line);}
+.sec-head{margin-bottom:48px;}
+.sec-head .eyebrow{display:block;margin-bottom:16px;}
+.sec-head h2{font-family:var(--serif);font-weight:300;font-size:clamp(28px,3.6vw,48px);line-height:1.04;letter-spacing:-0.01em;}
+.sec-head h2 em{font-style:italic;}
+.cgrid{display:grid;grid-template-columns:repeat(5,1fr);gap:clamp(28px,3vw,46px);}
+.cgroup h4{font-family:var(--sans);font-size:10.5px;text-transform:uppercase;letter-spacing:.2em;color:var(--bronze);padding-bottom:14px;margin-bottom:6px;border-bottom:1px solid var(--line);}
+.cgroup a{display:flex;justify-content:space-between;align-items:baseline;gap:10px;padding:8px 0;font-size:14px;color:var(--ink-soft);font-weight:300;transition:color .2s;border-bottom:1px solid var(--line-soft);}
+.cgroup a:hover{color:var(--ink);}
+.cgroup a .n{font-size:11px;color:var(--ink-faint);letter-spacing:.04em;}
+.cgroup a:hover .n{color:var(--bronze);}
+
+@media(max-width:1000px){.cgrid{grid-template-columns:repeat(3,1fr);}}
+@media(max-width:920px){
+  .dest{grid-auto-rows:190px;}
+  .t-a,.t-b,.t-c,.t-d,.t-e,.t-f{grid-column:span 6;grid-row:span 1;}
+}
+@media(max-width:620px){
+  .cgrid{grid-template-columns:1fr 1fr;}
+  .dest{grid-template-columns:1fr;grid-auto-rows:210px;}
+  .t-a,.t-b,.t-c,.t-d,.t-e,.t-f{grid-column:auto;grid-row:auto;}
+}
+
+/* footer */
+.foot{border-top:1px solid var(--line);padding:clamp(60px,7vw,96px) 0 44px;}
+.foot-top{display:grid;grid-template-columns:2.2fr 1fr 1fr 1fr;gap:40px;}
+.foot h4{font-size:10.5px;text-transform:uppercase;letter-spacing:.2em;color:var(--ink-faint);margin-bottom:20px;}
+.foot a{display:block;font-size:13.5px;color:var(--ink-soft);padding:7px 0;transition:.2s;font-weight:300;}
+.foot a:hover{color:var(--ink);}
+.foot-brand .wordmark{font-size:18px;}
+.foot-brand p{margin-top:22px;font-size:14px;color:var(--ink-soft);line-height:1.7;max-width:36ch;font-weight:300;}
+.foot-bot{display:flex;justify-content:space-between;align-items:center;margin-top:60px;padding-top:28px;border-top:1px solid var(--line);font-size:12px;color:var(--ink-faint);flex-wrap:wrap;gap:14px;font-weight:300;}
+.foot-disc{max-width:60ch;line-height:1.6;}
+@media(max-width:920px){.foot-top{grid-template-columns:1fr 1fr;}}
+@media(max-width:560px){.foot-top{grid-template-columns:1fr;gap:30px;}.foot-bot{flex-direction:column;align-items:flex-start;}.sec-head h2{font-size:clamp(26px,7vw,40px);}}
+</style>
+</head>
+<body>
+
+<nav id="site-nav" data-active="destinations"></nav>
+
+<header class="page-head wrap">
+  <span class="eyebrow">Where to go</span>
+  <h1>The world,<br><em>region by region</em></h1>
+  <p class="lead">From the hill towns of Europe to the far reaches of Oceania — start with a part of the world, then narrow it down to a single, remarkable place to stay.</p>
+</header>
+
+<section class="wrap">
+  <div class="dest" id="dest"></div>
+</section>
+
+<section class="country-sec wrap">
+  <div class="sec-head">
+    <span class="eyebrow">Go deeper</span>
+    <h2>Browse by <em>country</em></h2>
+  </div>
+  <div class="cgrid" id="cgrid"></div>
+</section>
+
+<!-- FOOTER -->
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <span class="wordmark">Outbound <span class="thin">Stays</span></span>
+        <p>A handpicked collection of the world's most inspiring places to stay. Chosen on merit, for the kind of experiences that stay with you for life.</p>
+      </div>
+      <div><h4>Explore</h4><a href="explore.html">World map</a><a href="destinations.html">Destinations</a><a href="experiences.html">Experiences</a></div>
+      <div><h4>Outbound</h4><a href="list-hotel.html">List your hotel</a><a href="index.html#promise">Our promise</a><a href="#">The journal</a></div>
+      <div><h4>Follow</h4><a href="https://www.instagram.com/outboundstays/" target="_blank" rel="noopener">Instagram</a><a href="https://www.instagram.com/mediterravie/" target="_blank" rel="noopener">Mediterravie</a><a href="#newsletter" data-newsletter>Newsletter</a></div>
+    </div>
+    <div class="foot-bot">
+      <span>© 2026 Outbound Stays</span>
+      <span class="foot-disc">Some links are affiliate links. If you book through them we may earn a commission, at no cost to you. It never influences what we choose to feature.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="data/hotels.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="js/nav.js"></script>
+<script>
+const H = window.HOTELS || [];
+const fmt = n => n.toLocaleString('en-US');
+const REGIONS = ['Europe','Asia','Americas','Africa & Middle East','Oceania'];
+
+// verify an image actually loads (with timeout) — resolves true/false
+function check(url){
+  return new Promise(res=>{
+    const im=new Image(); let done=false;
+    const t=setTimeout(()=>{if(!done){done=true;res(false);}},6000);
+    im.onload=()=>{if(!done){done=true;clearTimeout(t);res(im.naturalWidth>2);}};
+    im.onerror=()=>{if(!done){done=true;clearTimeout(t);res(false);}};
+    im.src=url;
+  });
+}
+function shuf(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+
+const regionCount = r => H.filter(h=>h.region===r).length;
+
+(async function build(){
+  // Candidate covers from reliable CDN, verified before use — one good photo per region.
+  const pool = H.filter(h=>/bstatic\.com/.test(h.img) && h.gallery && h.gallery.length>=3);
+  const byR={}; pool.forEach(h=>(byR[h.region]=byR[h.region]||[]).push(h));
+  const used = new Set();
+
+  async function pick(r){
+    const list = shuf(byR[r]||[]).slice(0,16);
+    for(const h of list){ if(used.has(h.id)) continue; if(await check(h.img)){ used.add(h.id); return h.img; } }
+    return '';
+  }
+
+  const meta=[['Europe','t-a'],['Asia','t-b'],['Americas','t-c'],['Africa & Middle East','t-d'],['Oceania','t-e']];
+  const imgs = {};
+  await Promise.all(meta.map(async ([r])=>{ imgs[r]=await pick(r); }));
+
+  let html = meta.map(([r,cls])=>{
+    const c = imgs[r];
+    const cover = c ? `<img loading="lazy" src="${c}" alt="${r}">` : `<div class="cover-ph"><span class="tag">cover · ${r.toLowerCase()}</span></div>`;
+    return `<a class="tile ${cls}" href="explore.html?region=${encodeURIComponent(r)}">
+      ${cover}<div class="grad"></div>
+      <div class="cap"><h3>${r}</h3><div class="c">${fmt(regionCount(r))} stays <span class="arr">→</span></div></div></a>`;
+  }).join('');
+
+  // closing tile → whole map
+  const anyImg = imgs['Europe']||imgs['Asia']||Object.values(imgs).find(Boolean)||'';
+  const mapCover = anyImg ? `<img loading="lazy" src="${anyImg}" alt="">` : `<div class="cover-ph"><span class="tag">cover · world map</span></div>`;
+  html += `<a class="tile t-f" href="explore.html">
+    ${mapCover}<div class="grad"></div>
+    <div class="cap"><h3>The whole map</h3><div class="c">${fmt(H.length)} stays worldwide <span class="arr">→</span></div></div></a>`;
+  document.getElementById('dest').innerHTML = html;
+})();
+
+// ---- Country index, grouped by region ----
+const cgrid = document.getElementById('cgrid');
+cgrid.innerHTML = REGIONS.map(r=>{
+  const countries = {};
+  H.filter(h=>h.region===r).forEach(h=>{ const c=(h.country||'').trim(); if(c) countries[c]=(countries[c]||0)+1; });
+  const list = Object.entries(countries).sort((a,b)=>b[1]-a[1] || a[0].localeCompare(b[0]));
+  if(!list.length) return '';
+  return `<div class="cgroup">
+    <h4>${r}</h4>
+    ${list.map(([c,n])=>`<a href="explore.html?country=${encodeURIComponent(c)}"><span>${c}</span><span class="n">${fmt(n)}</span></a>`).join('')}
+  </div>`;
+}).join('');
+</script>
+</body>
+</html>
