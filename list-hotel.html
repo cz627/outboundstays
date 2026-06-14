@@ -23,6 +23,8 @@
 <meta name="twitter:image" content="https://outboundstays.com/uploads/OUTBOUND%20Icon.png">
 <link rel="stylesheet" href="css/luxe.css">
 <style>
+/* Roomier side gutter for content on every screen, incl. smaller desktops/laptops */
+:root{--gut:clamp(26px, 6.2vw, 96px);}
 /* hero */
 .lh-hero{position:relative;min-height:84vh;display:flex;align-items:center;overflow:hidden;background:#15120d;}
 .lh-hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.82;}
@@ -35,7 +37,7 @@
 .lh-hero .cta-row{display:flex;gap:14px;flex-wrap:wrap;align-items:center;}
 
 /* shared */
-.section{padding:clamp(70px,9vw,140px) 0;}
+.section{padding-top:clamp(70px,9vw,140px);padding-bottom:clamp(70px,9vw,140px);}
 .center{text-align:center;}
 .eyebrow.k{display:block;margin-bottom:20px;}
 .h-display{font-family:var(--serif);font-weight:300;font-size:clamp(32px,4.6vw,62px);line-height:1.05;letter-spacing:-0.01em;}
@@ -126,6 +128,8 @@
 /* footer */
 .foot{border-top:1px solid var(--line);padding:44px 0;}
 .foot-in{max-width:var(--maxw);margin:0 auto;padding:0 var(--gut);display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;font-size:12px;color:var(--ink-faint);font-weight:300;}
+.foot-legal{margin-top:20px;padding-top:20px;border-top:1px solid var(--line-soft);}
+.foot-disc{max-width:64ch;line-height:1.6;text-align:right;}
 
 @media(max-width:900px){
   .statband{grid-template-columns:1fr;}
@@ -141,6 +145,7 @@
 @media(max-width:560px){
   .steps{grid-template-columns:1fr;}
   .foot-in{flex-direction:column;align-items:flex-start;text-align:left;}
+  .foot-disc{text-align:left;}
   .lh-hero .cta-row{flex-direction:column;align-items:flex-start;}
 }
 </style>
@@ -166,9 +171,9 @@
 
 <!-- INTRO -->
 <section class="section center wrap" style="padding-bottom:clamp(40px,5vw,70px);">
-  <span class="eyebrow k">A curated collection, not a marketplace</span>
+  <span class="eyebrow k">A curated collection</span>
   <h2 class="h-display">Reach travellers who<br>care <em>where they wake up</em></h2>
-  <p class="lead">Outbound Stays is a handpicked guide to the world's most inspiring places to stay. We don't list everyone — which is exactly why discerning travellers trust us, and why a place in the collection means something. Guests discover your hotel through editorial we write by hand, then book directly with you.</p>
+  <p class="lead">Outbound Stays is a handpicked guide to the world's most inspiring places to stay. We don't list everyone — which is exactly why discerning travellers trust us, and why a place in the collection means something.</p>
 </section>
 
 <!-- STATS -->
@@ -176,7 +181,7 @@
   <div class="statband">
     <div class="s"><div class="n" id="stStays">1,470</div><div class="l">Curated stays</div></div>
     <div class="s"><div class="n">80+</div><div class="l">Countries</div></div>
-    <div class="s"><div class="n">Direct</div><div class="l">Bookings, straight to you</div></div>
+    <div class="s"><div class="n">1M+</div><div class="l">Annual page views</div></div>
   </div>
 </section>
 
@@ -187,9 +192,9 @@
     <h2 class="h-display" style="max-width:16ch;">The benefits of being <em>chosen</em></h2>
   </div>
   <div class="benefits">
-    <div class="benefit"><div class="num">01</div><h3>A high-intent audience</h3><p>Our readers arrive already inspired and ready to travel. They're not price-shopping a thousand listings — they're looking for somewhere worth the journey.</p></div>
+    <div class="benefit"><div class="num">01</div><h3>A high-intent audience</h3><p>Our followers arrive already inspired and ready to travel — looking for somewhere worth the journey.</p></div>
     <div class="benefit"><div class="num">02</div><h3>Editorial, written by hand</h3><p>Every featured hotel gets a considered write-up and a gallery that does it justice. No template descriptions, no star ratings — just an honest portrait of the place.</p></div>
-    <div class="benefit"><div class="num">03</div><h3>Direct relationships</h3><p>We send guests to book directly with you. You keep the relationship, the data and the margin — we simply make the introduction.</p></div>
+    <div class="benefit"><div class="num">03</div><h3>Request a direct listing</h3><p>Prefer a guaranteed place in the collection? Hotels can request to be listed directly with us through an annual membership.</p></div>
     <div class="benefit"><div class="num">04</div><h3>No pay-to-play, ever</h3><p>You can't buy your way onto Outbound Stays. That integrity is the whole point — and it's what makes a feature genuinely valuable.</p></div>
   </div>
 </section>
@@ -204,7 +209,7 @@
     <div class="step"><div class="num">1</div><h4>Apply</h4><p>Tell us about your hotel using the form below. It takes a few minutes — no fees, no commitment.</p></div>
     <div class="step"><div class="num">2</div><h4>We review &amp; vet</h4><p>Our editors assess every application for character, design and sense of place — and visit where we can.</p></div>
     <div class="step"><div class="num">3</div><h4>You're featured</h4><p>If it's a fit, we craft your profile and add it to the collection and the map, in front of the right audience.</p></div>
-    <div class="step"><div class="num">4</div><h4>Guests book direct</h4><p>Travellers discover your hotel and book straight with you — you keep the guest relationship.</p></div>
+    <div class="step"><div class="num">4</div><h4>Guests book direct</h4><p>Travellers discover your hotel and book with you or your preferred booking partner — you keep the guest relationship.</p></div>
   </div>
 </section>
 
@@ -218,7 +223,7 @@
       <li><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="m5 13 4 4L19 7"/></svg></span><span><b>A strong sense of place.</b> A hotel that could only exist where it is.</span></li>
       <li><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="m5 13 4 4L19 7"/></svg></span><span><b>Thoughtful design.</b> Architecture, interiors and detail that feel considered.</span></li>
       <li><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="m5 13 4 4L19 7"/></svg></span><span><b>Genuine hospitality.</b> People and service that make guests want to return.</span></li>
-      <li><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="m5 13 4 4L19 7"/></svg></span><span><b>Independent spirit.</b> Boutique hotels, design hotels, retreats, lodges, villas and one-of-a-kind stays — not chains.</span></li>
+      <li><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="m5 13 4 4L19 7"/></svg></span><span><b>Independent spirit.</b> Boutique hotels, design hotels, retreats, lodges, villas and one-of-a-kind stays.</span></li>
     </ul>
   </div>
 </section>
@@ -243,7 +248,8 @@
       </div>
     </div>
     <div>
-      <form class="form" id="applyForm" novalidate>
+      <form class="form" id="applyForm" action="https://formspree.io/f/mdavpjaa" method="POST" novalidate>
+        <input type="hidden" name="_subject" value="New hotel listing application">
         <div class="fgroup"><label>Hotel name</label><input name="hotel" required placeholder="e.g. Château Victor"></div>
         <div class="frow2">
           <div class="fgroup"><label>City</label><input name="city" required placeholder="City or area"></div>
@@ -262,6 +268,7 @@
         <div class="fgroup"><label>Tell us what makes it special</label><textarea name="about" placeholder="Design, location, story, the experience of staying…"></textarea></div>
         <button class="btn btn-dark" type="submit">Submit application</button>
         <p class="fine">By applying you agree to be contacted by the Outbound Stays editorial team. We never share your details.</p>
+        <p class="fine" id="applyErr" style="display:none;color:var(--bronze-deep);">Something went wrong — please try again, or email us directly.</p>
       </form>
       <div class="thanks" id="thanks">
         <span class="serif">Thank you.</span>
@@ -278,9 +285,9 @@
     <h2 class="h-display">Questions, <em>answered</em></h2>
   </div>
   <div class="faq" style="max-width:920px;margin:0 auto;">
-    <details><summary>What does it cost to be listed?<span class="pm"></span></summary><div class="ans">Nothing to apply, and nothing to be featured. Outbound Stays earns through affiliate partnerships on bookings, so we only benefit when a guest loves your hotel enough to book it. There are no listing fees or subscriptions.</div></details>
+    <details><summary>What does it cost to be listed?<span class="pm"></span></summary><div class="ans">Editorial features are free. Outbound Stays earns through affiliate partnerships on bookings, so we only benefit when a guest loves your hotel enough to book it. Hotels that would prefer a guaranteed place in the collection can request a direct listing, for which an annual membership fee applies.</div></details>
     <details><summary>What kinds of properties do you accept?<span class="pm"></span></summary><div class="ans">Independent boutique hotels, design hotels, retreats, lodges, villas and genuinely unique stays. We don't feature chains or properties without a strong sense of place. Size matters far less than character.</div></details>
-    <details><summary>How do bookings work?<span class="pm"></span></summary><div class="ans">We send travellers to book directly with you or through your preferred booking partner. You keep the guest relationship, the data and the margin — we simply make the introduction through our editorial.</div></details>
+    <details><summary>How do bookings work?<span class="pm"></span></summary><div class="ans">Travellers discover your hotel through our editorial and book with you or your preferred booking partner. You keep the guest relationship, the data and the margin.</div></details>
     <details><summary>How long does the review take?<span class="pm"></span></summary><div class="ans">Our editorial team aims to respond to every application within five working days. If your hotel is a strong fit, we'll discuss next steps, imagery and your profile.</div></details>
     <details><summary>Can I pay to feature more prominently?<span class="pm"></span></summary><div class="ans">No. Placement is editorial and can't be bought — that integrity is exactly what makes a feature on Outbound Stays worth having.</div></details>
   </div>
@@ -301,8 +308,11 @@
 <footer class="foot">
   <div class="foot-in">
     <span class="wordmark">Outbound <span class="thin">Stays</span></span>
-    <span class="foot-links"><a href="explore.html">Explore map</a><a href="destinations.html">Destinations</a><a href="experiences.html">Experiences</a><a href="list-hotel.html">List your hotel</a><a href="index.html#promise">Our promise</a></span>
-    <span>© 2026 Outbound Stays · Some links are affiliate links — we may earn a commission at no cost to you.</span>
+    <span class="foot-links"><a href="explore.html">Explore map</a><a href="destinations.html">Destinations</a><a href="experiences.html">Experiences</a><a href="list-hotel.html">List your hotel</a><a href="promise.html">Our promise</a></span>
+  </div>
+  <div class="foot-in foot-legal">
+    <span>© 2026 Outbound Stays</span>
+    <span class="foot-disc">Some links are affiliate links — we may earn a commission at no cost to you.</span>
   </div>
 </footer>
 
@@ -327,12 +337,23 @@ const stStays=document.getElementById('stStays'); if(stStays) stStays.textConten
 })();
 
 const form = document.getElementById('applyForm');
-form.addEventListener('submit', e=>{
+form.addEventListener('submit', async e=>{
   e.preventDefault();
   if(!form.checkValidity()){ form.reportValidity(); return; }
-  form.style.display='none';
-  document.getElementById('thanks').classList.add('on');
-  document.getElementById('thanks').scrollIntoView ? window.scrollTo({top:form.getBoundingClientRect().top+window.scrollY-140,behavior:'smooth'}) : null;
+  const btn = form.querySelector('button[type="submit"]');
+  const err = document.getElementById('applyErr');
+  err.style.display='none';
+  btn.disabled = true; const label = btn.textContent; btn.textContent = 'Submitting…';
+  try{
+    const res = await fetch(form.action, { method:'POST', headers:{ 'Accept':'application/json' }, body:new FormData(form) });
+    if(!res.ok) throw new Error('bad status '+res.status);
+    form.style.display='none';
+    document.getElementById('thanks').classList.add('on');
+    window.scrollTo({top:form.getBoundingClientRect().top+window.scrollY-140,behavior:'smooth'});
+  }catch(ex){
+    btn.disabled = false; btn.textContent = label;
+    err.style.display='block';
+  }
 });
 </script>
 </body>

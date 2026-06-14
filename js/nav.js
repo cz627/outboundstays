@@ -13,18 +13,103 @@
         window.open(a.href,'_blank','noopener,noreferrer');
       }
     });
-    // Safe image fallback: if any photo fails to load, hide it so the container's
-    // neutral background shows — never swap in another hotel's photo (which would
-    // mislabel it). Curated/dark sections are pre-verified separately.
-    document.addEventListener('error', e=>{
-      const t = e.target;
-      if(t && t.tagName==='IMG' && !t.dataset.failed){
-        const s = t.getAttribute('src') || '';
-        if(!/^https?:|^data:/i.test(s)) return; // ignore empty / not-yet-set images
-        t.dataset.failed = '1';
-        t.style.opacity = '0';
+    // Safe image fallback. Some hotel photos point at CDN images that have since
+    // been removed (e.g. a dead booking.com /xdata/ id) — the URL is valid but
+    // 404s. When that happens we DON'T just blank the box: we walk the SAME
+    // hotel's remaining gallery photos (never another hotel's, which would
+    // mislabel it) and use the first that loads. Only if every photo for that
+    // hotel is dead do we drop in an on-brand striped placeholder so the layout
+    // never shows an empty hole.
+    const PLACEHOLDER = (function(){
+      const svg =
+        "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300' preserveAspectRatio='xMidYMid slice'>"
+        + "<defs><pattern id='p' width='13' height='13' patternUnits='userSpaceOnUse' patternTransform='rotate(45)'>"
+        + "<rect width='13' height='13' fill='#F2EFE9'/><rect width='6.5' height='13' fill='#ECE7DE'/></pattern></defs>"
+        + "<rect width='400' height='300' fill='url(#p)'/>"
+        + "<rect x='177' y='127' width='46' height='46' transform='rotate(45 200 150)' fill='none' stroke='#9A7E52' stroke-width='1.4' opacity='.45'/>"
+        + "</svg>";
+      return 'data:image/svg+xml,' + encodeURIComponent(svg);
+    })();
+    let urlMap = null;
+    function buildUrlMap(){
+      urlMap = new Map();
+      const H = window.HOTELS || [];
+      for(const h of H){
+        const urls = [];
+        if(h.img) urls.push(h.img);
+        (h.gallery || []).forEach(u => { if(u && urls.indexOf(u) < 0) urls.push(u); });
+        for(const u of urls){ if(!urlMap.has(u)) urlMap.set(u, urls); }
       }
-    }, true);
+    }
+    // Probe a URL once (cached): resolves true only if it actually decodes.
+    // Dead booking.com CDN ids HANG instead of 404ing, so we cap each probe.
+    const probeCache = new Map();
+    function probe(url){
+      if(probeCache.has(url)) return probeCache.get(url);
+      const p = new Promise(res=>{
+        const im = new Image();
+        const tm = setTimeout(()=>{ im.src = ''; res(false); }, 7000);
+        im.onload  = ()=>{ clearTimeout(tm); res(im.naturalWidth >= 2); };
+        im.onerror = ()=>{ clearTimeout(tm); res(false); };
+        im.src = url;
+      });
+      probeCache.set(url, p);
+      return p;
+    }
+    // Recover a broken hotel <img>: probe the SAME hotel's candidate photos in
+    // parallel and swap in the first that decodes (a serial walk could take 30s+
+    // when several ids hang). If every photo is dead, drop in an on-brand striped
+    // placeholder so the layout never shows an empty hole. Never borrows another
+    // hotel's photo (which would mislabel it). Triggered by a real error event OR
+    // the watchdog below, since hung images never fire 'error'.
+    function recover(t){
+      if(!(t && t.tagName === 'IMG') || t.dataset.failed || t.__resolving) return;
+      const s = t.getAttribute('src') || '';
+      if(!/^https?:/i.test(s)) return; // ignore empty / not-yet-set / data: (incl. placeholder)
+      if(urlMap === null) buildUrlMap();
+      const cands = urlMap.get(s);
+      if(!cands) return; // not a known hotel photo — leave map tiles / QR / etc. alone
+      t.__resolving = 1;
+      let settled = false, pending = cands.length;
+      const finish = url => {
+        if(settled) return; settled = true; t.__resolving = 0;
+        t.style.opacity = '1';
+        if(url){ if((t.currentSrc || t.src) !== url) t.src = url; }
+        else { t.dataset.failed = '1'; t.src = PLACEHOLDER; }
+      };
+      cands.forEach(u => probe(u).then(ok => {
+        if(settled) return;
+        pending--;
+        if(ok) finish(u);            // first photo that loads wins
+        else if(pending === 0) finish(null); // all dead -> placeholder
+      }));
+    }
+    document.addEventListener('error', e => recover(e.target), true);
+
+    // Watchdog: hung images never fire 'error', so if a hotel photo hasn't
+    // decoded within 4.5s, kick off recovery anyway. Scoped to hotel photos only
+    // (never map tiles / QR / decorative imagery) to avoid needless work.
+    function watch(t){
+      if(!(t && t.tagName === 'IMG') || t.__watched) return;
+      const s = t.getAttribute('src') || '';
+      if(!/^https?:/i.test(s)) return;
+      if(urlMap === null) buildUrlMap();
+      if(!urlMap.has(s)) return; // only watch known hotel photos
+      t.__watched = 1;
+      if(t.complete && t.naturalWidth >= 2) return; // already loaded fine
+      let done = false;
+      const tm = setTimeout(()=>{ if(!done && (!t.complete || t.naturalWidth < 2)) recover(t); }, 4500);
+      t.addEventListener('load', ()=>{ done = true; clearTimeout(tm); }, { once:true });
+    }
+    function scan(root){ (root.querySelectorAll ? root.querySelectorAll('img') : []).forEach(watch); }
+    new MutationObserver(muts=>{
+      for(const m of muts) for(const n of m.addedNodes){
+        if(n.nodeType !== 1) continue;
+        if(n.tagName === 'IMG') watch(n); else scan(n);
+      }
+    }).observe(document.documentElement, { childList:true, subtree:true });
+    if(document.readyState !== 'loading') scan(document);
+    else document.addEventListener('DOMContentLoaded', ()=>scan(document));
   }
 
   const mount = document.getElementById('site-nav');

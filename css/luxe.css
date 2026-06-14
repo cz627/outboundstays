@@ -173,8 +173,11 @@ p{margin:0;}
 .nl-art img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
 .nl-art-tag{position:relative;z-index:1;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:10.5px;letter-spacing:.1em;color:rgba(255,255,255,.92);background:rgba(20,18,13,.42);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);border:1px solid rgba(255,255,255,.28);padding:6px 11px;}
 @media(max-width:680px){
+  .nl-modal{padding:18px;}
   .nl-card{grid-template-columns:1fr;max-height:94vh;overflow-y:auto;}
   .nl-art{min-height:120px;order:-1;}
+  .nl-form-side{padding:30px 24px 34px;}   /* symmetric L/R margin around the field + button */
+  .nl-field button{padding:0 20px;}        /* keep button from crowding the popup edge */
 }
 
 /* ===== Category / region cover tiles (Experiences + Destinations) ===== */

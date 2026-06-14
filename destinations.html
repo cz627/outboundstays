@@ -23,7 +23,9 @@
 <meta name="twitter:image" content="https://outboundstays.com/uploads/OUTBOUND%20Icon.png">
 <link rel="stylesheet" href="css/luxe.css">
 <style>
-.page-head{padding:clamp(64px,8vw,120px) 0 clamp(40px,5vw,60px);text-align:center;}
+/* Roomier side gutter for content on every screen, incl. smaller desktops/laptops */
+:root{--gut:clamp(26px, 6.2vw, 96px);}
+.page-head{padding-top:clamp(64px,8vw,120px);padding-bottom:clamp(40px,5vw,60px);text-align:center;}
 .page-head .eyebrow{display:block;margin-bottom:22px;}
 .page-head h1{font-family:var(--serif);font-weight:300;font-size:clamp(40px,6vw,82px);line-height:1.02;letter-spacing:-0.01em;}
 .page-head h1 em{font-style:italic;}
@@ -48,7 +50,7 @@
 .t-f{grid-column:span 4;}
 
 /* country index */
-.country-sec{padding:clamp(40px,5vw,72px) 0 clamp(70px,9vw,130px);border-top:1px solid var(--line);}
+.country-sec{padding-top:clamp(40px,5vw,72px);padding-bottom:clamp(70px,9vw,130px);border-top:1px solid var(--line);}
 .sec-head{margin-bottom:48px;}
 .sec-head .eyebrow{display:block;margin-bottom:16px;}
 .sec-head h2{font-family:var(--serif);font-weight:300;font-size:clamp(28px,3.6vw,48px);line-height:1.04;letter-spacing:-0.01em;}
@@ -80,9 +82,9 @@
 .foot-brand .wordmark{font-size:18px;}
 .foot-brand p{margin-top:22px;font-size:14px;color:var(--ink-soft);line-height:1.7;max-width:36ch;font-weight:300;}
 .foot-bot{display:flex;justify-content:space-between;align-items:center;margin-top:60px;padding-top:28px;border-top:1px solid var(--line);font-size:12px;color:var(--ink-faint);flex-wrap:wrap;gap:14px;font-weight:300;}
-.foot-disc{max-width:60ch;line-height:1.6;}
+.foot-disc{max-width:60ch;line-height:1.6;text-align:right;}
 @media(max-width:920px){.foot-top{grid-template-columns:1fr 1fr;}}
-@media(max-width:560px){.foot-top{grid-template-columns:1fr;gap:30px;}.foot-bot{flex-direction:column;align-items:flex-start;}.sec-head h2{font-size:clamp(26px,7vw,40px);}}
+@media(max-width:560px){.foot-top{grid-template-columns:1fr;gap:30px;}.foot-bot{flex-direction:column;align-items:flex-start;}.foot-disc{text-align:left;}.sec-head h2{font-size:clamp(26px,7vw,40px);}}
 </style>
 </head>
 <body>
@@ -116,7 +118,7 @@
         <p>A handpicked collection of the world's most inspiring places to stay. Chosen on merit, for the kind of experiences that stay with you for life.</p>
       </div>
       <div><h4>Explore</h4><a href="explore.html">World map</a><a href="destinations.html">Destinations</a><a href="experiences.html">Experiences</a></div>
-      <div><h4>Outbound</h4><a href="list-hotel.html">List your hotel</a><a href="index.html#promise">Our promise</a><a href="#">The journal</a></div>
+      <div><h4>Outbound</h4><a href="list-hotel.html">List your hotel</a><a href="promise.html">Our promise</a><a href="#">The journal</a></div>
       <div><h4>Follow</h4><a href="https://www.instagram.com/outboundstays/" target="_blank" rel="noopener">Instagram</a><a href="https://www.instagram.com/mediterravie/" target="_blank" rel="noopener">Mediterravie</a><a href="#newsletter" data-newsletter>Newsletter</a></div>
     </div>
     <div class="foot-bot">
