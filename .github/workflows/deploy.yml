@@ -5,6 +5,7 @@ on:
     branches:
       - main
       - claude/inspiring-cray-u9qwrz
+      - claude/eager-curie-uozh9m
   workflow_dispatch:
 
 permissions:
