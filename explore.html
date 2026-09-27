@@ -154,7 +154,7 @@ const state = { q:(params.get('q')||'').trim(), region:params.get('region')||'',
 
 const map = L.map('map',{zoomControl:false,worldCopyJump:true,minZoom:2}).setView([30,8],3);
 L.control.zoom({position:'bottomleft'}).addTo(map);
-L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',{attribution:'© OpenStreetMap · © CARTO',subdomains:'abcd',maxZoom:19}).addTo(map);
+L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}',{attribution:'Tiles © Esri',maxZoom:16}).addTo(map);
 
 const cluster = L.markerClusterGroup({
   maxClusterRadius:48, showCoverageOnHover:false,
