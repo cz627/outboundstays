@@ -167,14 +167,15 @@ function tags(){
   if(base.length===0){base.push(h.region,tierLabel[h.price]);}
   return base.slice(0,6);
 }
-const gal=(h.gallery&&h.gallery.length?h.gallery:[h.img]).slice(0,8);
-let galValid = gal.slice(0,5);
+const gal=[...new Set([h.img,...(h.gallery||[])].filter(Boolean))].slice(0,8);
+let galValid = gal.slice();
 function check(url){return new Promise(res=>{const im=new Image();let d=false;const t=setTimeout(()=>{if(!d){d=true;res(false);}},6000);im.onload=()=>{if(!d){d=true;clearTimeout(t);res(im.naturalWidth>2);}};im.onerror=()=>{if(!d){d=true;clearTimeout(t);res(false);}};im.src=url;});}
 function galleryHTML(){
-  const n=Math.min(galValid.length,5);
+  const n=Math.min(galValid.length,5), extra=galValid.length-n;
   return galValid.slice(0,5).map((src,i)=>{
-    const big=(n>=5&&i===0)?'big':'';
-    return `<a class="${big}" data-i="${i}"><img loading="lazy" src="${src}" alt="${h.name}"></a>`;
+    const cls=[(n>=5&&i===0)?'big':'',(extra>0&&i===n-1)?'show-more':''].filter(Boolean).join(' ');
+    const ov=(extra>0&&i===n-1)?`<span class="ov">+${extra}</span>`:'';
+    return `<a class="${cls}" data-i="${i}"><img loading="lazy" src="${src}" alt="${h.name}">${ov}</a>`;
   }).join('');
 }
 const exp=tags();
@@ -255,7 +256,7 @@ bindGallery();
   const checks=await Promise.all(gal.map(s=>check(s)));
   let working=gal.filter((s,i)=>checks[i]);
   if(working.length===0) working=[h.img];
-  galValid=working.slice(0,5);
+  galValid=working;
   const gEl=document.querySelector('.gallery');
   gEl.className='gallery g'+Math.min(galValid.length,5);
   gEl.innerHTML=galleryHTML();
