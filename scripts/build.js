@@ -154,6 +154,11 @@ main.wrap{padding-top:40px;padding-bottom:80px;}
 .staylist a{color:var(--ink);}
 .staylist .meta{color:var(--ink-faint);font-size:12.5px;}
 @media(max-width:700px){.staylist{columns:1;}}
+.foot{border-top:1px solid var(--line);padding:44px 0;}
+.foot-in{max-width:var(--maxw);margin:0 auto;padding:0 var(--gut);display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;font-size:12px;color:var(--ink-faint);font-weight:300;}
+.foot-legal{margin-top:20px;padding-top:20px;border-top:1px solid var(--line-soft);}
+.foot{margin-top:60px;}
+@media(max-width:700px){.foot-in{flex-direction:column;align-items:flex-start;text-align:left;}}
 </style>
 </head>
 <body>
@@ -169,7 +174,7 @@ main.wrap{padding-top:40px;padding-bottom:80px;}
     <span class="wordmark">Outbound <span class="thin">Stays</span></span>
     <span class="foot-links"><a href="/explore.html">Explore map</a><a href="/destinations.html">Destinations</a><a href="/experiences.html">Experiences</a><a href="/list-hotel.html">List your hotel</a><a href="/llms.txt">llms.txt</a></span>
   </div>
-  <div class="foot-in foot-legal"><span>© 2026 Outbound Stays</span></div>
+  <div class="foot-in foot-legal"><span>© 2026 Outbound Stays</span><span class="foot-disc"><span class="foot-tip" tabindex="0" role="note" aria-label="Affiliate disclosure: Some links are affiliate links. If you book through them we may earn a commission, at no cost to you. It never influences what we choose to feature." data-tip="Some links are affiliate links. If you book through them we may earn a commission, at no cost to you. It never influences what we choose to feature.">i</span></span></div>
 </footer>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script src="/js/nav.js"></script>
