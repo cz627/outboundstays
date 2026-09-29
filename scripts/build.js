@@ -19,7 +19,7 @@ const stayPath = h => `/stays/${h.id}-${slug(h.name)}.html`;
 const abs = u => /^https?:\/\//.test(u) ? u : SITE + '/' + u.replace(/^\//, '');
 const tierLabel = { '$': 'Considered', '$$': 'Boutique', '$$$': 'Luxury', '$$$$': 'Rarefied' };
 const tierBlurb = { '$': 'Thoughtful value', '$$': 'Boutique character', '$$$': 'Quietly luxurious', '$$$$': 'Rare & rarefied' };
-const photos = h => [...new Set([h.img, ...(h.gallery || [])].filter(Boolean))].slice(0, 12);
+const photos = h => [...new Set([h.img, ...(h.gallery || [])].filter(Boolean))].slice(0, 16);
 const place = h => (h.city ? h.city + ', ' : '') + h.country;
 const isAffiliate = u => /dpbolvw\.net|anrdoezrs\.net|jdoqocy\.com|tkqlhce\.com|kqzyfj\.com/.test(u || '');
 const dist2 = (a, b) => { const dx = a.lat - b.lat, dy = a.lng - b.lng; return dx * dx + dy * dy; };

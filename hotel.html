@@ -168,7 +168,7 @@ function tags(){
   if(base.length===0){base.push(h.region,tierLabel[h.price]);}
   return base.slice(0,6);
 }
-const gal=[...new Set([h.img,...(h.gallery||[])].filter(Boolean))].slice(0,12);
+const gal=[...new Set([h.img,...(h.gallery||[])].filter(Boolean))].slice(0,16);
 let galValid = gal.slice();
 function check(url){return new Promise(res=>{const im=new Image();let d=false;const t=setTimeout(()=>{if(!d){d=true;res(true);}},12000);im.onload=()=>{if(!d){d=true;clearTimeout(t);res(im.naturalWidth>2);}};im.onerror=()=>{if(!d){d=true;clearTimeout(t);res(false);}};im.src=url;});}
 function galleryHTML(){
