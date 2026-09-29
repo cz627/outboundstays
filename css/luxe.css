@@ -183,3 +183,11 @@ p{margin:0;}
 /* ===== Category / region cover tiles (Experiences + Destinations) ===== */
 .cover-ph{position:absolute;inset:0;background:#211d17;background-image:repeating-linear-gradient(135deg,rgba(255,255,255,.045) 0 2px,transparent 2px 10px);display:flex;align-items:center;justify-content:center;}
 .cover-ph .tag{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:11px;letter-spacing:.08em;color:rgba(255,255,255,.4);text-transform:lowercase;border:1px solid rgba(255,255,255,.16);padding:6px 11px;}
+
+/* footer affiliate disclosure: hover / focus tooltip */
+.foot-tip{position:relative;display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border:1px solid var(--line);border-radius:50%;color:var(--ink-faint);font-family:var(--serif);font-style:italic;font-size:13px;line-height:1;cursor:help;transition:.2s;}
+.foot-tip:hover,.foot-tip:focus-visible{color:var(--ink);border-color:var(--ink);outline:none;}
+.foot-tip::after{content:attr(data-tip);position:absolute;bottom:calc(100% + 10px);right:-4px;width:min(320px,80vw);background:var(--ink);color:#fff;font-family:var(--sans);font-style:normal;font-weight:300;font-size:12px;line-height:1.55;padding:12px 14px;text-align:left;opacity:0;visibility:hidden;transform:translateY(4px);transition:opacity .2s,transform .2s,visibility .2s;pointer-events:none;z-index:50;}
+.foot-tip::before{content:'';position:absolute;bottom:calc(100% + 4px);left:50%;margin-left:-6px;border:6px solid transparent;border-top-color:var(--ink);border-bottom:0;opacity:0;visibility:hidden;transition:.2s;}
+.foot-tip:hover::after,.foot-tip:focus-visible::after,.foot-tip:hover::before,.foot-tip:focus-visible::before{opacity:1;visibility:visible;transform:none;}
+@media(max-width:560px){.foot-tip::after{right:auto;left:-4px;}}
