@@ -46,11 +46,14 @@
     const probeCache = new Map();
     function probe(url){
       if(probeCache.has(url)) return probeCache.get(url);
+      // Resolves true (decoded), false (errored) or null (still loading after the
+      // cap — unknown, NOT dead). A slow CDN under load must not be mistaken for a
+      // 404. If it does finish later the cache entry is replaced with the real answer.
       const p = new Promise(res=>{
         const im = new Image();
-        const tm = setTimeout(()=>{ im.src = ''; res(false); }, 7000);
-        im.onload  = ()=>{ clearTimeout(tm); res(im.naturalWidth >= 2); };
-        im.onerror = ()=>{ clearTimeout(tm); res(false); };
+        const tm = setTimeout(()=>res(null), 12000);
+        im.onload  = ()=>{ clearTimeout(tm); const ok = im.naturalWidth >= 2; probeCache.set(url, Promise.resolve(ok)); res(ok); };
+        im.onerror = ()=>{ clearTimeout(tm); probeCache.set(url, Promise.resolve(false)); res(false); };
         im.src = url;
       });
       probeCache.set(url, p);
@@ -69,8 +72,9 @@
       if(urlMap === null) buildUrlMap();
       const cands = urlMap.get(s);
       if(!cands) return; // not a known hotel photo — leave map tiles / QR / etc. alone
+      if(t.complete && t.naturalWidth >= 2) return; // finished loading in the meantime
       t.__resolving = 1;
-      let settled = false, pending = cands.length;
+      let settled = false, pending = cands.length, unknown = 0;
       const finish = url => {
         if(settled) return; settled = true; t.__resolving = 0;
         t.style.opacity = '1';
@@ -81,7 +85,14 @@
         if(settled) return;
         pending--;
         if(ok) finish(u);            // first photo that loads wins
-        else if(pending === 0) finish(null); // all dead -> placeholder
+        else if(ok === null) unknown++;
+        if(pending === 0 && !settled){
+          if(unknown === 0) finish(null); // every photo really errored -> placeholder
+          else { // some still loading: leave the original src alone and look again later
+            settled = true; t.__resolving = 0; t.__tries = (t.__tries || 0) + 1;
+            if(t.__tries < 3) setTimeout(()=>recover(t), 10000);
+          }
+        }
       }));
     }
     document.addEventListener('error', e => recover(e.target), true);
@@ -97,9 +108,17 @@
       if(!urlMap.has(s)) return; // only watch known hotel photos
       t.__watched = 1;
       if(t.complete && t.naturalWidth >= 2) return; // already loaded fine
-      let done = false;
-      const tm = setTimeout(()=>{ if(!done && (!t.complete || t.naturalWidth < 2)) recover(t); }, 4500);
-      t.addEventListener('load', ()=>{ done = true; clearTimeout(tm); }, { once:true });
+      const arm = ()=>{
+        let done = false;
+        const tm = setTimeout(()=>{ if(!done && (!t.complete || t.naturalWidth < 2)) recover(t); }, 9000);
+        t.addEventListener('load', ()=>{ done = true; clearTimeout(tm); }, { once:true });
+      };
+      // A lazy image that is still off-screen hasn't even started loading — arming
+      // the watchdog for it would fire hundreds of needless probes on long lists.
+      if(t.loading === 'lazy' && 'IntersectionObserver' in window){
+        const io = new IntersectionObserver(es=>{ if(es.some(e=>e.isIntersecting)){ io.disconnect(); arm(); } }, { rootMargin:'600px' });
+        io.observe(t);
+      } else arm();
     }
     function scan(root){ (root.querySelectorAll ? root.querySelectorAll('img') : []).forEach(watch); }
     new MutationObserver(muts=>{

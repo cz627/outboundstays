@@ -169,7 +169,7 @@ function tags(){
 }
 const gal=[...new Set([h.img,...(h.gallery||[])].filter(Boolean))].slice(0,8);
 let galValid = gal.slice();
-function check(url){return new Promise(res=>{const im=new Image();let d=false;const t=setTimeout(()=>{if(!d){d=true;res(false);}},6000);im.onload=()=>{if(!d){d=true;clearTimeout(t);res(im.naturalWidth>2);}};im.onerror=()=>{if(!d){d=true;clearTimeout(t);res(false);}};im.src=url;});}
+function check(url){return new Promise(res=>{const im=new Image();let d=false;const t=setTimeout(()=>{if(!d){d=true;res(true);}},12000);im.onload=()=>{if(!d){d=true;clearTimeout(t);res(im.naturalWidth>2);}};im.onerror=()=>{if(!d){d=true;clearTimeout(t);res(false);}};im.src=url;});}
 function galleryHTML(){
   const n=Math.min(galValid.length,5), extra=galValid.length-n;
   return galValid.slice(0,5).map((src,i)=>{
