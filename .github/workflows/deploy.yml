@@ -28,6 +28,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Build static stay pages, sitemap and llms.txt
+        run: node scripts/build.js
+
       - name: Configure Pages
         uses: actions/configure-pages@v5
 

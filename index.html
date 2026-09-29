@@ -157,6 +157,12 @@
   .foot-disc{text-align:left;}
 }
 </style>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+ {"@type":"Organization","@id":"https://outboundstays.com/#org","name":"Outbound Stays","url":"https://outboundstays.com/","logo":"https://outboundstays.com/uploads/OUTBOUND%20Icon.png","sameAs":["https://www.instagram.com/outboundstays/"],"description":"An independent editorial collection of handpicked places to stay around the world, chosen on merit for character, design and sense of place."},
+ {"@type":"WebSite","@id":"https://outboundstays.com/#website","name":"Outbound Stays","url":"https://outboundstays.com/","publisher":{"@id":"https://outboundstays.com/#org"},"potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://outboundstays.com/explore.html?q={search_term_string}"},"query-input":"required name=search_term_string"}}
+]}
+</script>
 </head>
 <body>
 
@@ -252,7 +258,7 @@
         <p>A handpicked collection of the world's most inspiring places to stay. Chosen on merit, for the kind of experiences that stay with you for life.</p>
       </div>
       <div><h4>Explore</h4><a href="explore.html">World map</a><a href="destinations.html">Destinations</a><a href="experiences.html">Experiences</a></div>
-      <div><h4>Outbound</h4><a href="list-hotel.html">List your hotel</a><a href="#">The journal</a></div>
+      <div><h4>Outbound</h4><a href="list-hotel.html">List your hotel</a><a href="/stays/">All stays</a><a href="#">The journal</a><a href="/llms.txt">llms.txt</a></div>
       <div><h4>Follow</h4><a href="https://www.instagram.com/outboundstays/" target="_blank" rel="noopener">Instagram</a><a href="https://www.instagram.com/mediterravie/" target="_blank" rel="noopener">Mediterravie</a><a href="#newsletter" data-newsletter>Newsletter</a></div>
     </div>
     <div class="foot-bot">
@@ -313,13 +319,13 @@ function spread(n,skip,src){
   layerA.src = hero.img;
   if(layerA.complete && layerA.naturalWidth>2) showHero();
   heroCap.innerHTML = `<b>${hero.name}</b>${hero.city?hero.city+', ':''}${hero.country}<span class="ar">↗</span>`;
-  heroCap.href = 'hotel.html?id='+hero.id;
+  heroCap.href = stayUrl(hero);
   heroCap.style.opacity = 1;
 
   // ---- FEATURED STAYS (the full curated selection, in listed order) ----
   const feat = FEATURED_IDS.map(id=>H.find(h=>h.id===id)).filter(Boolean);
   document.getElementById('fgrid').innerHTML = feat.map(h=>`
-    <a class="fcard" href="hotel.html?id=${h.id}">
+    <a class="fcard" href="${stayUrl(h)}">
       <div class="fig"><img loading="lazy" src="${h.img}" alt="${h.name}">
         <div class="save"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1B1A17" stroke-width="1.5"><path d="M19 14c1.5-1.5 3-3.3 3-5.5C22 5.4 19.9 3 17 3c-1.8 0-3.4 1-4.5 2.5C11.4 4 9.8 3 8 3 5.1 3 3 5.4 3 8.5c0 2.2 1.5 4 3 5.5l6 6 7-6z"/></svg></div>
       </div>
@@ -355,7 +361,7 @@ function spread(n,skip,src){
   document.getElementById('spotLoc').textContent = (spot.city?spot.city+', ':'')+spot.country;
   document.getElementById('spotName').textContent = spot.name;
   document.getElementById('spotDesc').textContent = spot.desc;
-  document.getElementById('spotBtn').href = 'hotel.html?id='+spot.id;
+  document.getElementById('spotBtn').href = stayUrl(spot);
   used.add(spot.id);
 
   // ---- MAP CTA ----

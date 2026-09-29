@@ -130,7 +130,7 @@
 <footer class="foot">
   <div class="foot-in">
     <span class="wordmark">Outbound <span class="thin">Stays</span></span>
-    <span class="foot-links"><a href="explore.html">Explore map</a><a href="destinations.html">Destinations</a><a href="experiences.html">Experiences</a><a href="list-hotel.html">List your hotel</a></span>
+    <span class="foot-links"><a href="explore.html">Explore map</a><a href="destinations.html">Destinations</a><a href="experiences.html">Experiences</a><a href="list-hotel.html">List your hotel</a><a href="/stays/">All stays</a><a href="/llms.txt">llms.txt</a></span>
   </div>
   <div class="foot-in foot-legal">
     <span>© 2026 Outbound Stays</span>
@@ -147,10 +147,11 @@ const H = window.HOTELS || [];
 const tierLabel = {'$':'Considered','$$':'Boutique','$$$':'Luxury','$$$$':'Rarefied'};
 const tierBlurb = {'$':'Thoughtful value','$$':'Boutique character','$$$':'Quietly luxurious','$$$$':'Rare & rarefied'};
 const params = new URLSearchParams(location.search);
-let id = parseInt(params.get('id'),10);
+let id = window.__HOTEL_ID ?? parseInt(params.get('id'),10);
 if(isNaN(id) || !H.find(h=>h.id===id)) id = H[0].id;
 const h = H.find(x=>x.id===id);
 document.title = h.name + ' — Outbound Stays';
+if(!window.__HOTEL_ID){const canon=document.querySelector('link[rel="canonical"]');if(canon)canon.href='https://outboundstays.com'+stayUrl(h);}
 
 function tags(){
   const base=[];
@@ -234,7 +235,7 @@ function nearCandidates(){
   const ok=cand.filter((n,i)=>checks[i]);
   const list=(ok.length?ok:cand).slice(0,4);
   document.getElementById('ngrid').innerHTML=list.map(n=>`
-    <a class="ncard" href="hotel.html?id=${n.id}">
+    <a class="ncard" href="${stayUrl(n)}">
       <div class="nfig"><img loading="lazy" src="${n.img}" alt="${n.name}"></div>
       <div class="nloc">${n.city||n.country}</div>
       <div class="nname">${n.name}</div>

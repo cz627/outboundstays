@@ -1,6 +1,8 @@
 /* Outbound Stays — shared Luxe navbar + Follow-us panel.
    Mount with: <nav id="site-nav" data-active="explore"></nav>
    Load qrcode lib before this file for the QR; degrades gracefully if absent. */
+// Canonical URL of a stay's static page (mirrors scripts/build.js).
+window.stayUrl = h => '/stays/' + h.id + '-' + String(h.name).normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'').slice(0,60) + '.html';
 (function(){
   // Route external target=_blank links through window.open so sandboxed previews
   // open a real top-level tab instead of trying (and failing) to frame them.
@@ -141,12 +143,12 @@
   <div class="nav-inner">
     <button class="nav-burger" id="navBurger" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
     <div class="nav-left">
-      <a href="explore.html" class="nav-link${A('explore')}">Explore map</a>
-      <a href="destinations.html" class="nav-link${A('destinations')}">Destinations</a>
+      <a href="/explore.html" class="nav-link${A('explore')}">Explore map</a>
+      <a href="/destinations.html" class="nav-link${A('destinations')}">Destinations</a>
     </div>
-    <div class="nav-center"><a href="index.html" class="wordmark">Outbound <span class="thin">Stays</span></a></div>
+    <div class="nav-center"><a href="/" class="wordmark">Outbound <span class="thin">Stays</span></a></div>
     <div class="nav-right">
-      <a href="experiences.html" class="nav-link${A('experiences')}">Experiences</a>
+      <a href="/experiences.html" class="nav-link${A('experiences')}">Experiences</a>
       <div class="nav-item follow" id="followItem">
         <button class="follow-trigger" id="followBtn" aria-haspopup="true" aria-expanded="false">Follow
           <svg class="chev" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
@@ -197,10 +199,10 @@
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="m6 6 12 12M18 6 6 18"/></svg>
         </button>
         <nav class="m-nav">
-          <a class="m-link${A('explore')}" href="explore.html">Explore map</a>
-          <a class="m-link${A('destinations')}" href="destinations.html">Destinations</a>
-          <a class="m-link${A('experiences')}" href="experiences.html">Experiences</a>
-          <a class="m-link${A('list')}" href="list-hotel.html">List your hotel</a>
+          <a class="m-link${A('explore')}" href="/explore.html">Explore map</a>
+          <a class="m-link${A('destinations')}" href="/destinations.html">Destinations</a>
+          <a class="m-link${A('experiences')}" href="/experiences.html">Experiences</a>
+          <a class="m-link${A('list')}" href="/list-hotel.html">List your hotel</a>
         </nav>
         <a class="btn btn-dark m-news" href="https://www.instagram.com/outboundstays/" target="_blank" rel="noopener">Instagram</a>
       </div>`;
@@ -243,7 +245,7 @@
             <p>Look out for our next letter landing soon. In the meantime, the whole collection is yours to wander.</p>
           </div>
         </div>
-        <div class="nl-art"><img src="uploads/countryside.avif" alt=""><span class="nl-art-tag">a few of our favourite places</span></div>
+        <div class="nl-art"><img src="/uploads/countryside.avif" alt=""><span class="nl-art-tag">a few of our favourite places</span></div>
       </div>`;
     document.body.appendChild(modal);
 

@@ -166,7 +166,7 @@ const markers={};
 function makeMarker(h){
   const icon=L.divIcon({className:'pin-wrap',html:'<div class="pin"></div>',iconSize:[18,18],iconAnchor:[9,9]});
   const m=L.marker([h.lat,h.lng],{icon}); m.hotel=h;
-  m.bindPopup(`<div class="pop-fig"><img src="${h.img}" alt=""></div><div class="pop-body"><div class="pop-loc">${h.city||h.country}</div><div class="pop-name">${h.name}</div><a class="pop-link" href="hotel.html?id=${h.id}">View this stay →</a></div>`,{closeButton:true,minWidth:250,maxWidth:250});
+  m.bindPopup(`<div class="pop-fig"><img src="${h.img}" alt=""></div><div class="pop-body"><div class="pop-loc">${h.city||h.country}</div><div class="pop-name">${h.name}</div><a class="pop-link" href="${stayUrl(h)}">View this stay →</a></div>`,{closeButton:true,minWidth:250,maxWidth:250});
   m.on('click',()=>setActive(h.id,false));
   return m;
 }
