@@ -151,7 +151,7 @@ let id = window.__HOTEL_ID ?? parseInt(params.get('id'),10);
 if(isNaN(id) || !H.find(h=>h.id===id)) id = H[0].id;
 const h = H.find(x=>x.id===id);
 document.title = h.name + ' — Outbound Stays';
-if(!window.__HOTEL_ID){const canon=document.querySelector('link[rel="canonical"]');if(canon)canon.href='https://outboundstays.com'+stayUrl(h);}
+if(!window.__HOTEL_ID){const canon=document.querySelector('link[rel="canonical"]');if(canon)canon.href='https://outboundstays.com'+stayUrl(h);if(params.get('id')!==null)location.replace(stayUrl(h));}
 
 function tags(){
   const base=[];
